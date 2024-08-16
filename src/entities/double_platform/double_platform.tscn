@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cr2tpd8ablly4"]
 
-[ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://scenes/obstacle.tscn" id="1_vpd3i"]
-[ext_resource type="Script" path="res://scenes/double_platform.gd" id="1_xam1x"]
+[ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_vpd3i"]
+[ext_resource type="Script" path="res://entities/double_platform/double_platform.gd" id="1_xam1x"]
 
 [node name="DoublePlatform" type="CharacterBody2D"]
 script = ExtResource("1_xam1x")

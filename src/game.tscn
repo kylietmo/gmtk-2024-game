@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://da47do0euyldr"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_38r6y"]
-[ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://scenes/player.tscn" id="2_pwwdn"]
+[ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
+[ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_38r6y")
+script = ExtResource("1_qfrmy")
 
-[node name="Player" parent="." instance=ExtResource("2_pwwdn")]
+[node name="Player" parent="." instance=ExtResource("2_761th")]
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]

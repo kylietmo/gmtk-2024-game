@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gmtk-2024-game"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [display]

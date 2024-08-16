@@ -7,7 +7,7 @@ const SPEED = -300.0
 
 var CurrTimeUntilSpawn = 0.0
 var Obstacles : Array[CharacterBody2D]= []
-var DoublePlatformScene = preload("res://scenes/double_platform.tscn")
+var DoublePlatformScene = preload("res://entities/double_platform/double_platform.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
