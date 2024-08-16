@@ -13,19 +13,19 @@ script = ExtResource("1_ejrxe")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 576.0
-offset_top = 256.0
-offset_right = 1344.0
-offset_bottom = 448.0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 1024.0
+offset_bottom = 264.0
 theme_override_font_sizes/font_size = 48
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 576.0
-offset_top = 640.0
-offset_right = 1344.0
-offset_bottom = 832.0
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 1024.0
+offset_bottom = 576.0
 theme_override_font_sizes/font_size = 48
 text = "Quit"
 

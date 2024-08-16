@@ -2,9 +2,8 @@ extends Node2D
 
 @export var MIN_SECS_BETWEEN_SPAWNS = 0.5
 @export var MAX_SECS_BETWEEN_SPAWNS = 2.0
-
-@export var SPEED = -300.0
-@onready var Player = $Player
+@export var SPEED = -500.0
+@onready var player = $Player
 
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
 var curr_time_between_spawns = 0.0
@@ -13,6 +12,7 @@ var double_platform_scene = preload("res://entities/double_platform/double_platf
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player.position.y = get_viewport().size.y * -0.25
 	spawn_obstacle()
 	determine_time_until_next_obstacle_spawn()
 
