@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bql4uh46bxh0l"]
+
+[ext_resource type="Script" path="res://entities/barrier_wall/barrier_wall.gd" id="1_f51uv"]
+[ext_resource type="Texture2D" uid="uid://brijparfdj8qw" path="res://sprites/black_rectangle.png" id="1_xbh3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tfjh"]
+size = Vector2(61.8103, 896.02)
+
+[node name="BarrierWall" type="StaticBody2D"]
+script = ExtResource("1_f51uv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1, 0.319998)
+texture = ExtResource("1_xbh3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.46905, -1.3113e-05)
+scale = Vector2(1.34182, 1.01783)
+shape = SubResource("RectangleShape2D_3tfjh")
