@@ -17,9 +17,9 @@ scale = Vector2(5, 5)
 [node name="Barriers" type="Node2D" parent="."]
 
 [node name="LeftWall" parent="Barriers" instance=ExtResource("3_tlj01")]
-position = Vector2(-800, 0)
+position = Vector2(-500, 0)
 
 [node name="RightWall" parent="Barriers" instance=ExtResource("3_tlj01")]
-position = Vector2(800, 0)
+position = Vector2(500, 0)
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

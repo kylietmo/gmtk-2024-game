@@ -15,6 +15,7 @@ func _ready() -> void:
 	player.position.y = get_viewport().size.y * -0.25
 	spawn_obstacle()
 	determine_time_until_next_obstacle_spawn()
+	adjust_barriers()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -45,6 +46,11 @@ func spawn_obstacle() -> void:
 func determine_time_until_next_obstacle_spawn() -> void:
 	var rand = randf_range(MIN_SECS_BETWEEN_SPAWNS, MAX_SECS_BETWEEN_SPAWNS)
 	time_until_next_spawn = rand
+	
+func adjust_barriers() -> void:
+	var viewport_width = get_viewport().size.x
+	$Barriers/LeftWall.position.x = viewport_width / -2 + 100
+	$Barriers/RightWall.position.x = viewport_width / 2 - 100
 	
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is DoublePlatform:
