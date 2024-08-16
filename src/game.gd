@@ -1,36 +1,51 @@
 extends Node2D
 
-@export var NUM_OBSTACLES_AT_ONCE = 1
-@export var NUM_SECS_BETWEEN_SPAWNS = 2.0
-const SPEED = -300.0
+@export var MIN_SECS_BETWEEN_SPAWNS = 0.5
+@export var MAX_SECS_BETWEEN_SPAWNS = 2.0
+
+@export var SPEED = -300.0
 @onready var Player = $Player
 
-var CurrTimeUntilSpawn = 0.0
-var Obstacles : Array[CharacterBody2D]= []
-var DoublePlatformScene = preload("res://entities/double_platform/double_platform.tscn")
+var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
+var curr_time_between_spawns = 0.0
+var obstacles : Array[CharacterBody2D]= []
+var double_platform_scene = preload("res://entities/double_platform/double_platform.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_obstacle()
+	determine_time_until_next_obstacle_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	CurrTimeUntilSpawn += delta
-	for o in Obstacles:
+	curr_time_between_spawns += delta
+	
+	# Update all existing obstacles to be moving up. 
+	# TODO: If/when we change the direction of the level we'd need
+	# to make this configurable per current direction.
+	for o in obstacles:
 		if is_instance_valid(o):
 			o.position.y += delta * SPEED
-	if CurrTimeUntilSpawn >= NUM_SECS_BETWEEN_SPAWNS:
+
+	# Check to see if it's time to spawn a new platform. 
+	if curr_time_between_spawns >= time_until_next_spawn:
+		curr_time_between_spawns = 0.0
 		spawn_obstacle()
-		CurrTimeUntilSpawn = 0.0
+		determine_time_until_next_obstacle_spawn()
 	
 func spawn_obstacle() -> void:
-	
-	var obstacle = DoublePlatformScene.instantiate()
-	obstacle.position.x = Player.position.x
-	obstacle.position.y = get_viewport_rect().end.y
-	Obstacles.append(obstacle)
+	var obstacle : Node2D = double_platform_scene.instantiate()
+	var viewport_rect = get_viewport_rect()
+	var viewport_rect_x = viewport_rect.size.x
+	obstacle.position.x = randf_range(-viewport_rect_x, viewport_rect_x)
+	obstacle.position.y = viewport_rect.end.y
+	obstacles.append(obstacle)
 	add_child(obstacle)
 
+func determine_time_until_next_obstacle_spawn() -> void:
+	var rand = randf_range(MIN_SECS_BETWEEN_SPAWNS, MAX_SECS_BETWEEN_SPAWNS)
+	time_until_next_spawn = rand
+	
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is DoublePlatform:
-		Obstacles.erase(node)
+		obstacles.erase(node)
