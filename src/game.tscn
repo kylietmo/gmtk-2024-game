@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://da47do0euyldr"]
+[gd_scene load_steps=4 format=3 uid="uid://da47do0euyldr"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
 [ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
+[ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
@@ -11,5 +12,13 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(5, 5)
+
+[node name="Barriers" type="Node2D" parent="."]
+
+[node name="LeftWall" parent="Barriers" instance=ExtResource("3_tlj01")]
+position = Vector2(-800, 0)
+
+[node name="RightWall" parent="Barriers" instance=ExtResource("3_tlj01")]
+position = Vector2(800, 0)
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
