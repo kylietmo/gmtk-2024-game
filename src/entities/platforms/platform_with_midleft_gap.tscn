@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhklif45j3xqh"]
+
+[ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_pjlqc"]
+[ext_resource type="Script" path="res://entities/platforms/platform_with_midleft_gap.gd" id="2_u5qe0"]
+
+[node name="PlatformWithMidleftGap" type="CharacterBody2D"]
+script = ExtResource("2_u5qe0")
+
+[node name="LeftPlatform" parent="." instance=ExtResource("1_pjlqc")]
+
+[node name="RightPlatform" parent="." instance=ExtResource("1_pjlqc")]
