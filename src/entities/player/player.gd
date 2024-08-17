@@ -1,12 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
-@export var SPEED = Globals.IN_BOUNDS_WIDTH
+@export var SPEED = Globals.IN_BOUNDS_WIDTH * 1.2
 @export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 5
 @export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 5
 @export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25
 @export var SIZE_TRANSITION_DURATION = 0.1
-@export var SIZE_CHANGE_DURATION = 0.25
+@export var SIZE_CHANGE_DURATION = 0.15
 
 var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE)
 var MEDIUM_SCALE_VEC = Vector2(Globals.MEDIUM_SIZE_SCALE, Globals.MEDIUM_SIZE_SCALE)
@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is BreakableObstacle and current_size == sizes.LARGE:
-		body.queue_free()
-		Globals.score += 1
+		body.queue_free.call_deferred()
 	else:
 		get_tree().change_scene_to_file("res://menus/game_over_screen/game_over_screen.tscn")

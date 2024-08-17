@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://da47do0euyldr"]
+[gd_scene load_steps=7 format=3 uid="uid://da47do0euyldr"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
 [ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
 [ext_resource type="Script" path="res://barriers.gd" id="3_7qo2x"]
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
-[ext_resource type="Script" path="res://score_area.gd" id="5_1bc0v"]
 [ext_resource type="Script" path="res://score.gd" id="6_8tjsl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_stmys"]
-size = Vector2(240, 25)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
@@ -36,14 +32,6 @@ stream = ExtResource("4_ivb48")
 autoplay = true
 parameters/looping = true
 
-[node name="ScoreArea" type="Area2D" parent="."]
-position = Vector2(-768, -200)
-script = ExtResource("5_1bc0v")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
-shape = SubResource("RectangleShape2D_stmys")
-
 [node name="Score" type="Label" parent="."]
 z_index = 1000
 offset_left = -306.0
@@ -57,4 +45,3 @@ script = ExtResource("6_8tjsl")
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
-[connection signal="body_exited" from="ScoreArea" to="." method="_on_score_area_body_exited"]
