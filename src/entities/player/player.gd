@@ -44,6 +44,8 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
+	if current_size != sizes.MEDIUM:
+		velocity.x = 0
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION)
 	else:
