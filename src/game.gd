@@ -18,12 +18,14 @@ var platform_one_gap_scene = preload("res://entities/platforms/platform_with_one
 var platforms_two_gaps_scene = preload("res://entities/platforms/platforms_with_two_gaps.tscn")
 var platform_left_gap_scene = preload("res://entities/platforms/platform_with_left_gap.tscn")
 var platform_right_gap_scene = preload("res://entities/platforms/platform_with_right_gap.tscn")
+var platform_triple_gap_scene = preload("res://entities/platforms/platform_with_triple_gap.tscn")
 
 var obstacle_scenes : Array[Resource] = [
 	platform_one_gap_scene,
 	platforms_two_gaps_scene,
 	platform_left_gap_scene,
-	platform_right_gap_scene
+	platform_right_gap_scene,
+	platform_triple_gap_scene
 ]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
