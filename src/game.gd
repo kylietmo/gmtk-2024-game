@@ -22,14 +22,10 @@ var obstacle_scenes : Array[Resource] = [platform_one_gap_scene, platform_left_g
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var player_sprite : Sprite2D = player.find_child("Sprite2D")
-	var player_sprite_x = player_sprite.texture.get_size().x
 	Globals.score = 0
 	spawn_barrier_with_gaps()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:		
 	match player.current_size:
 		player.sizes.SMALL:
@@ -67,7 +63,7 @@ func spawn_breakable_obstacle() -> void:
 	var platform_width = Globals.IN_BOUNDS_WIDTH
 	var platform_height =  Globals.IN_BOUNDS_HEIGHT / 10
 
-	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
+	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2.0 + OBSTACLE_SPAWN_OFFSET
 	
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x

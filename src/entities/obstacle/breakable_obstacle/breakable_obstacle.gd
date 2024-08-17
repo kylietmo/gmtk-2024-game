@@ -1,7 +1,7 @@
 extends PlatformRow
 class_name BreakableObstacle
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_tree_exiting() -> void:
