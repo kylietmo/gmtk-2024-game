@@ -85,6 +85,8 @@ func spawn_barrier_with_gaps() -> void:
 		
 		platform.position.x = x + (platform_width / 2)
 		platform.position.y = Globals.RIGHT_BARRIER_X + OBSTACLE_SPAWN_OFFSET
+		print("platform.position.x: ", platform.position.x)
+		print("platform.position.y: ", platform.position.y)
 
 		var sprite : Sprite2D = platform.find_child("Sprite2D")
 		var platform_sprite_width = sprite.texture.get_size().x
@@ -92,6 +94,9 @@ func spawn_barrier_with_gaps() -> void:
 
 		platform.scale.x = platform_width / platform_sprite_width
 		platform.scale.y = platform_height / platform_sprite_height
+		
+		obstacles.append(platform)
+		add_child(platform)
 
 		x = x + platform_width
 		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - platform_width
