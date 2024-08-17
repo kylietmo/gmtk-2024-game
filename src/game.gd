@@ -95,22 +95,21 @@ func spawn_barrier_with_gaps() -> void:
 		platform.scale.x = platform_width / platform_sprite_width
 		platform.scale.y = platform_height / platform_sprite_height
 		
-		obstacles.append(platform)
-		add_child(platform)
-
-		x = x + platform_width
-		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - platform_width
-		if (distance_to_right_barrier < MIN_GAP_SIZE):
-			print("need to just continuee the platform")
+		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - x
+		if (distance_to_right_barrier + platform_width < MIN_GAP_SIZE):
+			print("need to just continue the platform")
 			# We just need to extend this platform size
-			platform_width += distance_to_right_barrier
+			platform_width = distance_to_right_barrier
 			platform.position.x = x + (platform_width / 2)
 			platform.scale.x = platform_width / platform_sprite_width
-
 			obstacles.append(platform)
 			add_child(platform)	
 			return
-		
+
+		obstacles.append(platform)
+		add_child(platform)
+		x = x + platform_width
+
 		# draw gap after platform
 		print("drawing gap after platform")
 		var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
