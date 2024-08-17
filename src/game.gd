@@ -15,10 +15,16 @@ extends Node
 var obstacles : Array[CharacterBody2D] = []
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
 var platform_one_gap_scene = preload("res://entities/platforms/platform_with_one_gap.tscn")
+var platforms_two_gaps_scene = preload("res://entities/platforms/platforms_with_two_gaps.tscn")
 var platform_left_gap_scene = preload("res://entities/platforms/platform_with_left_gap.tscn")
 var platform_right_gap_scene = preload("res://entities/platforms/platform_with_right_gap.tscn")
 
-var obstacle_scenes : Array[Resource] = [platform_one_gap_scene, platform_left_gap_scene, platform_right_gap_scene]
+var obstacle_scenes : Array[Resource] = [
+	platform_one_gap_scene,
+	platforms_two_gaps_scene,
+	platform_left_gap_scene,
+	platform_right_gap_scene
+]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
 
@@ -49,13 +55,11 @@ func spawn_barrier_with_gaps() -> void:
 	
 	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 	
-	
 	(platform as PlatformRow).connect("passed_score_threshold", _on_passed_score_threshold)
 	(platform as PlatformRow).connect("passed_spawn_threshold", _on_passed_spawn_threshold)
 	
 	obstacles.append(platform)
 	add_child.call_deferred(platform)
-
 
 func spawn_breakable_obstacle() -> void:
 	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
