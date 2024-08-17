@@ -21,9 +21,11 @@ Globals="*res://globals.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/resizable=false
-window/size/window_width_override=1500
-window/size/window_height_override=2000
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 
 [input]
 

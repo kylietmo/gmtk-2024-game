@@ -10,6 +10,9 @@ extends Node
 @export var MIN_OBSTACLE_HEIGHT = 50
 @export var MAX_OBSTACLE_HEIGHT = 150
 @export var PROBABILITY_OF_GAP = 0.3
+@export var MIN_SECS_BETWEEN_SPAWNS = 1.0
+@export var MAX_SECS_BETWEEN_SPAWNS = 2.0
+
 @onready var player : Player = %Player
 
 var obstacles : Array[CharacterBody2D] = []
@@ -17,6 +20,10 @@ var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
 
 const BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.25
+const OBSTACLE_SPAWN_OFFSET = 200
+
+var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
+var curr_time_between_spawns = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,7 +31,9 @@ func _ready() -> void:
 	spawn_barrier_with_gaps()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
+	curr_time_between_spawns += delta
+	
 	match player.current_size:
 		player.sizes.SMALL:
 			SPEED = -1200
@@ -40,6 +49,16 @@ func _process(delta: float) -> void:
 		if is_instance_valid(o):
 			o.position.y += delta * SPEED
 
+	# Check to see if it's time to spawn a new platform. 
+	if curr_time_between_spawns >= time_until_next_spawn:
+		curr_time_between_spawns = 0.0
+		spawn_obstacle()
+		determine_time_until_next_obstacle_spawn()
+
+func determine_time_until_next_obstacle_spawn() -> void:
+	var rand = randf_range(MIN_SECS_BETWEEN_SPAWNS, MAX_SECS_BETWEEN_SPAWNS)
+	time_until_next_spawn = rand
+
 func spawn_barrier_with_gaps() -> void:
 	var in_bounds_width = Globals.IN_BOUNDS_WIDTH
 	var bounds_center_pos_x =  in_bounds_width/2
@@ -53,7 +72,7 @@ func spawn_barrier_with_gaps() -> void:
 		var start_platform_size = 5
 		
 		start_platform.position.x = start_of_platform_x + (start_platform_size / 2)
-		start_platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+		start_platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 		var sprite : Sprite2D = start_platform.find_child("Sprite2D")
 		var platform_sprite_width = sprite.texture.get_size().x
 		var platform_sprite_height = sprite.texture.get_size().y
@@ -77,7 +96,7 @@ func spawn_barrier_with_gaps() -> void:
 			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 			
 			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 			
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
 			var platform_sprite_width = sprite.texture.get_size().x
@@ -99,7 +118,7 @@ func spawn_barrier_with_gaps() -> void:
 				continue
 			
 			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 
 			# TODO: add variable height
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
@@ -126,7 +145,7 @@ func spawn_breakable_obstacle() -> void:
 	
 	var platform_height = randi_range(100, 200)
 
-	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 	
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
@@ -142,13 +161,13 @@ func _on_child_exiting_tree(node: Node) -> void:
 	if node is Obstacle:
 		obstacles.erase(node)
 
-func _on_spawn_threshold_area_body_entered(body: Node2D) -> void:
+
+func spawn_obstacle() -> void:
 	var rand = randf()
-	if body is Obstacle:
-		if rand <= BREAKABLE_OBSTACLE_SPAWN_PROBABILITY:
-			spawn_breakable_obstacle()
-		else:
-			spawn_barrier_with_gaps()
+	if rand <= BREAKABLE_OBSTACLE_SPAWN_PROBABILITY:
+		spawn_breakable_obstacle()
+	else:
+		spawn_barrier_with_gaps()
 
 func _on_score_area_body_exited(body: Node2D) -> void:
 	if body is Obstacle:
