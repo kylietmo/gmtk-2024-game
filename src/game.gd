@@ -1,14 +1,14 @@
 extends Node
 
-@export var SPEED = -700.0
+@export var SPEED = -300.0
 
-@export var MIN_GAP_SIZE = 50
-@export var MAX_GAP_SIZE = 100
+@export var MIN_GAP_SIZE = 100
+@export var MAX_GAP_SIZE = 150
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
 @export var MIN_OBSTACLE_WIDTH = 200
 @export var MIN_OBSTACLE_HEIGHT = 50
-@export var MAX_OBSTACLE_HEIGHT = 200
+@export var MAX_OBSTACLE_HEIGHT = 150
 @export var PROBABILITY_OF_GAP = 0.3
 @onready var player : Player = %Player
 
@@ -28,11 +28,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match player.current_size:
 		player.sizes.SMALL:
-			SPEED = -1100
+			SPEED = -1200
 		player.sizes.MEDIUM:
-			SPEED = -700
-		player.sizes.LARGE:
 			SPEED = -300
+		player.sizes.LARGE:
+			SPEED = -200
 	
 	# Update all existing obstacles to be moving up. 
 	# TODO: If/when we change the direction of the level we'd need
