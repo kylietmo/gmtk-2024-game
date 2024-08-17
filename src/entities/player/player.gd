@@ -5,9 +5,9 @@ class_name Player
 @export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 5
 @export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 5
 @export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25
-@export var LARGE_SIZE_SCALE = 1.75
-@export var MEDIUM_SIZE_SCALE = 1.0
-@export var SMALL_SIZE_SCALE = 0.15
+@export var LARGE_SIZE_SCALE = 1.75 * Globals.IN_BOUNDS_WIDTH / 1980
+@export var MEDIUM_SIZE_SCALE = 1.0 * Globals.IN_BOUNDS_WIDTH / 1980
+@export var SMALL_SIZE_SCALE = 0.15 * Globals.IN_BOUNDS_WIDTH / 1980
 @export var SIZE_TRANSITION_DURATION = 0.1
 @export var SIZE_CHANGE_DURATION = 0.25
 
