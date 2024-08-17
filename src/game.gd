@@ -101,7 +101,7 @@ func spawn_barrier_with_gaps() -> void:
 			var platform : Obstacle = obstacle_scene.instantiate()
 			var platform_width = in_bounds_width/2 - start_of_platform_x
 			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
-			
+
 			platform.position.x = start_of_platform_x + (platform_width / 2)
 			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 			
