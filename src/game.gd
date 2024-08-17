@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var SPEED = -500.0
+@export var SPEED = -700.0
 
 @export var MIN_GAP_SIZE = 100
 @export var MAX_GAP_SIZE = 400
@@ -19,12 +19,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# TODO: tweak spawn rate based on sizes
 	match player.current_size:
 		player.sizes.SMALL:
-			SPEED = -700
+			SPEED = -1100
 		player.sizes.MEDIUM:
-			SPEED = -500
+			SPEED = -700
 		player.sizes.LARGE:
 			SPEED = -300
 	
