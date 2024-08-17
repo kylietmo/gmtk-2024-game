@@ -3,9 +3,9 @@ extends Node2D
 @export var MIN_SECS_BETWEEN_SPAWNS = 0.5
 @export var MAX_SECS_BETWEEN_SPAWNS = 0.8
 @export var SPEED = -500.0
-@onready var player = $Player
+@onready var player : Player = $Player
 
-const MIN_GAP_SIZE = 250
+const MIN_GAP_SIZE = 100
 const MAX_GAP_SIZE = 400
 
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
@@ -16,7 +16,6 @@ var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player.position.y = get_viewport().size.y * -0.25
 	adjust_barriers()
 	spawn_double_platform()
 	determine_time_until_next_obstacle_spawn()
@@ -24,6 +23,21 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	curr_time_between_spawns += delta
+	
+	# TODO: tweak spawn rate based on sizes
+	match player.current_size:
+		player.sizes.SMALL:
+			SPEED = -700
+			MIN_SECS_BETWEEN_SPAWNS = 0.4
+			MAX_SECS_BETWEEN_SPAWNS = 0.6
+		player.sizes.MEDIUM:
+			SPEED = -500
+			MIN_SECS_BETWEEN_SPAWNS = 0.5
+			MAX_SECS_BETWEEN_SPAWNS = 0.8
+		player.sizes.LARGE:
+			SPEED = -300
+			MIN_SECS_BETWEEN_SPAWNS = 2.0
+			MAX_SECS_BETWEEN_SPAWNS = 3.0
 	
 	# Update all existing obstacles to be moving up. 
 	# TODO: If/when we change the direction of the level we'd need
