@@ -2,8 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @export var SPEED = Globals.IN_BOUNDS_WIDTH * 1.2
-@export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 5
-@export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 5
+@export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 4
+@export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4
 @export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25
 @export var SIZE_TRANSITION_DURATION = 0.1
 @export var SIZE_CHANGE_DURATION = 0.15

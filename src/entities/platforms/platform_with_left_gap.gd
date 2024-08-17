@@ -2,7 +2,7 @@ extends PlatformRow
 
 @onready var right_platform: Obstacle = $RightPlatform
 
-const GAP_WIDTH_SCALAR = .125
+const GAP_WIDTH_SCALAR = .15
 
 # TODO: consider randomized height
 func _ready():
