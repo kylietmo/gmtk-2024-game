@@ -6,7 +6,10 @@ extends Node
 @export var MAX_GAP_SIZE = 100
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
-
+@export var MIN_OBSTACLE_WIDTH = 200
+@export var MIN_OBSTACLE_HEIGHT = 50
+@export var MAX_OBSTACLE_HEIGHT = 200
+@export var PROBABILITY_OF_GAP = 0.3
 @onready var player : Player = %Player
 
 var obstacles : Array[CharacterBody2D] = []
@@ -44,15 +47,12 @@ func spawn_barrier_with_gaps() -> void:
 	var viewport_height = viewport.size.y
 	var in_bounds_width = viewport_width - 2 * Globals.BARRIER_OFFSET
 	var bounds_center_pos_x =  in_bounds_width/2
-	
+
 	var start_of_platform_x = -in_bounds_width/2
 	var x = start_of_platform_x
 	
 	var is_gap_at_start = randi_range(0, 10) % 2 == 0
 	if (is_gap_at_start):
-		print("gap at start")
-
-		
 		var start_platform : Obstacle = obstacle_scene.instantiate()
 		var start_platform_size = 5
 		
@@ -73,17 +73,15 @@ func spawn_barrier_with_gaps() -> void:
 		x = start_of_platform_x
 
 	while x <= in_bounds_width/2:
-		# TODO: need a min platform size
-		var is_start_of_gap = randi_range(0, 100) <= 3
-		var at_end_platform =  (in_bounds_width/2  - x) < 200
+		var is_start_of_gap = randf_range(0, 1) <= PROBABILITY_OF_GAP
+		var at_end_platform =  (in_bounds_width/2  - x) < MIN_OBSTACLE_WIDTH
 		if (at_end_platform):
 			var platform : Obstacle = obstacle_scene.instantiate()
 			var platform_width = in_bounds_width/2 - start_of_platform_x
-			var platform_height = randi_range(100, 200)
+			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 			
 			platform.position.x = start_of_platform_x + (platform_width / 2)
 			platform.position.y = viewport_height
-			 #TODO: add variable height
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
 			var platform_sprite_width = sprite.texture.get_size().x
 			var platform_sprite_height = sprite.texture.get_size().y
@@ -100,9 +98,9 @@ func spawn_barrier_with_gaps() -> void:
 			print ("X: ", x)
 			var platform : Obstacle = obstacle_scene.instantiate()
 			var platform_width = x - start_of_platform_x
-			var platform_height = randi_range(50, 150)
+			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 
-			if (platform_width < 200):
+			if (platform_width < MIN_OBSTACLE_WIDTH):
 				x+= 1
 				continue
 			
