@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var MIN_SECS_BETWEEN_SPAWNS = .85
+@export var MIN_SECS_BETWEEN_SPAWNS = 0.85
 @export var MAX_SECS_BETWEEN_SPAWNS = 1.5
 @export var SPEED = -500.0
 @onready var player = $Player
@@ -52,7 +52,7 @@ func spawn_double_platform() -> void:
 	var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
 	
 	var left_platform_width = randi_range(0, in_bounds_width - gap_width)
-	var right_platform_width = in_bounds_width - left_platform_width - gap_width		
+	var right_platform_width = in_bounds_width - left_platform_width - gap_width
 
 	var sprite : Sprite2D = left_platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
