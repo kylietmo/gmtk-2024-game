@@ -7,7 +7,7 @@ extends Node2D
 
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
 var curr_time_between_spawns = 0.0
-var obstacles : Array[CharacterBody2D]= []
+var obstacles : Array[CharacterBody2D] = []
 var double_platform_scene = preload("res://entities/double_platform/double_platform.tscn")
 
 # Called when the node enters the scene tree for the first time.
