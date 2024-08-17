@@ -6,7 +6,8 @@ class_name Player
 @export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
 @export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25.0
 @export var SIZE_TRANSITION_DURATION = 0.1
-@export var SIZE_CHANGE_DURATION = 0.15
+@export var SMALL_SIZE_DURATION = 0.15
+@export var LARGE_SIZE_DURATION = 0.3
 
 var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE)
 var MEDIUM_SCALE_VEC = Vector2(Globals.MEDIUM_SIZE_SCALE, Globals.MEDIUM_SIZE_SCALE)
@@ -30,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		var small_size_tween = create_tween()
 		small_size_tween.tween_property(self, "scale", SMALL_SCALE_VEC, SIZE_TRANSITION_DURATION)
 		small_size_tween.parallel().tween_property(self, "current_size", sizes.SMALL, 0)
-		small_size_tween.tween_interval(SIZE_CHANGE_DURATION)
+		small_size_tween.tween_interval(SMALL_SIZE_DURATION)
 		small_size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
 		small_size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 
@@ -38,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		var large_size_tween = create_tween()
 		large_size_tween.tween_property(self, "scale", LARGE_SCALE_VEC, SIZE_TRANSITION_DURATION)
 		large_size_tween.parallel().tween_property(self, "current_size", sizes.LARGE, 0)
-		large_size_tween.tween_interval(SIZE_CHANGE_DURATION)
+		large_size_tween.tween_interval(LARGE_SIZE_DURATION)
 		large_size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
 		large_size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 
