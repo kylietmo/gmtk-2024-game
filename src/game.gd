@@ -7,7 +7,7 @@ extends Node
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
 @export var MIN_OBSTACLE_WIDTH = 100
-@export var MAX_OBSTACLE_WIDTH = 500
+@export var MAX_OBSTACLE_WIDTH = 300
 @export var MIN_OBSTACLE_HEIGHT = 50
 @export var MAX_OBSTACLE_HEIGHT = 150
 @export var PROBABILITY_OF_GAP = 0.3
@@ -75,11 +75,12 @@ func spawn_barrier_with_gaps() -> void:
 		
 	print ("starting x: ", x)
 	while x <= Globals.RIGHT_BARRIER_X:
+		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - x
 		print("---")
 		# draw first platform
 		print("drawing platform at: ", x)
 		var platform : Obstacle = obstacle_scene.instantiate()
-		var platform_width = randi_range(MIN_OBSTACLE_WIDTH, Globals.IN_BOUNDS_WIDTH - MIN_GAP_SIZE)
+		var platform_width = randi_range(MIN_OBSTACLE_WIDTH, distance_to_right_barrier)
 		print("platform_width: ", platform_width)
 		var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 		
@@ -95,7 +96,6 @@ func spawn_barrier_with_gaps() -> void:
 		platform.scale.x = platform_width / platform_sprite_width
 		platform.scale.y = platform_height / platform_sprite_height
 		
-		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - x
 		if (distance_to_right_barrier + platform_width < MIN_GAP_SIZE):
 			print("need to just continue the platform")
 			# We just need to extend this platform size
