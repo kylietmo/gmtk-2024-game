@@ -1,11 +1,11 @@
 extends Node2D
 
-@export var MIN_SECS_BETWEEN_SPAWNS = 0.85
-@export var MAX_SECS_BETWEEN_SPAWNS = 1.5
-@export var SPEED = -400.0
+@export var MIN_SECS_BETWEEN_SPAWNS = 0.5
+@export var MAX_SECS_BETWEEN_SPAWNS = 0.8
+@export var SPEED = -500.0
 @onready var player = $Player
 
-const MIN_GAP_SIZE = 150
+const MIN_GAP_SIZE = 250
 const MAX_GAP_SIZE = 400
 
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
