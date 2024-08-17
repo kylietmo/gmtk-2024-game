@@ -1,17 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://da47do0euyldr"]
+[gd_scene load_steps=8 format=3 uid="uid://da47do0euyldr"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
 [ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
+[ext_resource type="Script" path="res://score_area.gd" id="5_1bc0v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irenq"]
 size = Vector2(73, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stmys"]
+size = Vector2(77, 25)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
 
 [node name="Player" parent="." instance=ExtResource("2_761th")]
+unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -37,6 +42,24 @@ position = Vector2(-72, -81)
 position = Vector2(-426.5, 82)
 shape = SubResource("RectangleShape2D_irenq")
 
+[node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2(1, -94)
+script = ExtResource("5_1bc0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(-501, -6.5)
+shape = SubResource("RectangleShape2D_stmys")
+
+[node name="Score" type="Label" parent="."]
+z_index = 1000
+offset_left = -444.0
+offset_top = -325.0
+offset_right = -354.0
+offset_bottom = -291.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="body_entered" from="SpawnThresholdArea" to="." method="_on_spawn_threshold_area_body_entered"]
+[connection signal="body_exited" from="ScoreArea" to="." method="_on_score_area_body_exited"]

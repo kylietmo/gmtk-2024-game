@@ -14,6 +14,7 @@ var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Globals.score = 0
 	adjust_barriers()
 	spawn_barrier_with_gaps()
 
@@ -66,9 +67,6 @@ func spawn_barrier_with_gaps() -> void:
 			add_child(platform)
 			break
 		if (is_start_of_gap):
-			print ("-------------")
-			print ("STARTING GAP")
-			print ("X: ", x)
 			var platform : Obstacle = obstacle_scene.instantiate()
 			var platform_width = x - start_of_platform_x
 			var platform_height = randi_range(50, 150)
@@ -77,11 +75,10 @@ func spawn_barrier_with_gaps() -> void:
 				x+= 1
 				continue
 			
-			print ("Platform width: ", platform_width)
 			platform.position.x = start_of_platform_x + (platform_width / 2)
 			platform.position.y = viewport_height
-			print ("Platform x position: ", platform.position.x)
-			 #TODO: add variable height
+			
+			# TODO: add variable height
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
 			var platform_sprite_width = sprite.texture.get_size().x
 			var platform_sprite_height = sprite.texture.get_size().y
@@ -90,7 +87,6 @@ func spawn_barrier_with_gaps() -> void:
 			platform.scale.y = platform_height / platform_sprite_height
 
 			var gap_width = randi_range(100, 400)
-			print("Gap width: ", gap_width)
 			start_of_platform_x = x + gap_width
 			x = start_of_platform_x
 			obstacles.append(platform)
@@ -110,3 +106,9 @@ func _on_child_exiting_tree(node: Node) -> void:
 func _on_spawn_threshold_area_body_entered(body: Node2D) -> void:
 	if body is Obstacle:
 		spawn_barrier_with_gaps()
+
+
+func _on_score_area_body_exited(body: Node2D) -> void:
+	if body is Obstacle:
+		Globals.score += 1
+		$Score.text = "Score: " + str(Globals.score)
