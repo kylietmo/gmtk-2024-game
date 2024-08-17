@@ -80,7 +80,7 @@ func spawn_barrier_with_gaps() -> void:
 		# draw first platform
 		print("drawing platform at: ", x)
 		var platform : Obstacle = obstacle_scene.instantiate()
-		var platform_width = randi_range(MIN_OBSTACLE_WIDTH, distance_to_right_barrier)
+		var platform_width = randi_range(MIN_OBSTACLE_WIDTH, min(distance_to_right_barrier, MAX_OBSTACLE_WIDTH))
 		print("platform_width: ", platform_width)
 		var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 		
@@ -112,7 +112,7 @@ func spawn_barrier_with_gaps() -> void:
 
 		# draw gap after platform
 		print("drawing gap after platform")
-		var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
+		var gap_width = randi_range(MIN_GAP_SIZE, min(distance_to_right_barrier, MAX_GAP_SIZE))
 		print("gap_width: ", gap_width)
 		x = x + gap_width
 
