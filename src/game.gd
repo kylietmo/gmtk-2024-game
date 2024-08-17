@@ -1,14 +1,14 @@
 extends Node
 
 
-@export var SPEED = - Globals.IN_BOUNDS_HEIGHT / 4
+@onready var SPEED = - Globals.IN_BOUNDS_HEIGHT / 4
 
-@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 8
-@export var MAX_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 4
-@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 30
-@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 10
+@onready var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 8
+@onready var MAX_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 4
+@onready var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 30
+@onready var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 10
 
-@export var OBSTACLE_SPAWN_OFFSET = Globals.IN_BOUNDS_HEIGHT / 10
+@onready var OBSTACLE_SPAWN_OFFSET = Globals.IN_BOUNDS_HEIGHT / 10
 
 @onready var player : Player = %Player
 

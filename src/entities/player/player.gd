@@ -1,13 +1,13 @@
 extends CharacterBody2D
 class_name Player
 
-@export var SPEED = Globals.IN_BOUNDS_WIDTH * 1.2
-@export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
-@export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
-@export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25.0
-@export var SIZE_TRANSITION_DURATION = 0.1
-@export var SMALL_SIZE_DURATION = 0.15
-@export var LARGE_SIZE_DURATION = 0.3
+@onready var SPEED = Globals.IN_BOUNDS_WIDTH * 1.2
+@onready var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
+@onready var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
+@onready var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25.0
+@onready var SIZE_TRANSITION_DURATION = 0.1
+@onready var SMALL_SIZE_DURATION = 0.15
+@onready var LARGE_SIZE_DURATION = 0.3
 
 var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE)
 var MEDIUM_SCALE_VEC = Vector2(Globals.MEDIUM_SIZE_SCALE, Globals.MEDIUM_SIZE_SCALE)
