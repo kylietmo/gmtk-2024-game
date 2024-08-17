@@ -7,7 +7,7 @@ extends Node
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
 @export var MIN_OBSTACLE_WIDTH = 200
-@export var MAX_OBSTACLE_WIDTH = 300
+@export var MAX_OBSTACLE_WIDTH = 400
 @export var MIN_OBSTACLE_HEIGHT = 50
 @export var MAX_OBSTACLE_HEIGHT = 150
 @export var PROBABILITY_OF_GAP = 0.3
