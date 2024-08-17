@@ -2,11 +2,12 @@ extends Node
 
 
 @export var SPEED = - Globals.IN_BOUNDS_HEIGHT / 4
-@export var MIN_NUM_GAPS = 1
-@export var MAX_NUM_GAPS = 4
-@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 10
-@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 40
-@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 25
+
+@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 7
+@export var MAX_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 3
+@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 10
+@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 6
+
 @export var PROBABILITY_OF_GAP = 0.3
 @export var MIN_SECS_BETWEEN_SPAWNS = 1.0
 @export var MAX_SECS_BETWEEN_SPAWNS = 2.0
@@ -67,83 +68,42 @@ func determine_time_until_next_obstacle_spawn() -> void:
 	time_until_next_spawn = rand
 
 func spawn_barrier_with_gaps() -> void:
-	var in_bounds_width = Globals.IN_BOUNDS_WIDTH
-	var bounds_center_pos_x =  in_bounds_width/2
+	var x = Globals.LEFT_BARRIER_X
 
-	var start_of_platform_x = -in_bounds_width/2
-	var x = start_of_platform_x
-	
-	var is_gap_at_start = randi_range(0, 10) % 2 == 0
-	if (is_gap_at_start):
-		var start_platform : Obstacle = obstacle_scene.instantiate()
-		var start_platform_size = 5
+	var is_gap_at_start = randf_range(0, 1) <= PROBABILITY_OF_GAP
+	if is_gap_at_start:
+		var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
+		x = x + gap_width
 		
-		start_platform.position.x = start_of_platform_x + (start_platform_size / 2)
-		start_platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
-		var sprite : Sprite2D = start_platform.find_child("Sprite2D")
+	while x <= Globals.RIGHT_BARRIER_X:
+		var distance_to_right_barrier = Globals.RIGHT_BARRIER_X - x
+		# draw first platform
+		var platform : Obstacle = obstacle_scene.instantiate()
+		var platform_width = randi_range(MIN_OBSTACLE_WIDTH, min(distance_to_right_barrier, MAX_OBSTACLE_WIDTH))
+		var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
+		
+		platform.position.x = x + (platform_width / 2)
+		platform.position.y = Globals.RIGHT_BARRIER_X + OBSTACLE_SPAWN_OFFSET
+
+		var sprite : Sprite2D = platform.find_child("Sprite2D")
 		var platform_sprite_width = sprite.texture.get_size().x
 		var platform_sprite_height = sprite.texture.get_size().y
 
-		start_platform.scale.x = start_platform_size / platform_sprite_width
-		start_platform.scale.y = start_platform_size / platform_sprite_height
+		platform.scale.x = platform_width / platform_sprite_width
+		platform.scale.y = platform_height / platform_sprite_height
+		
+		if (distance_to_right_barrier + platform_width < MIN_GAP_SIZE):
+			# We just need to extend this platform size
+			platform_width = distance_to_right_barrier
+			platform.position.x = x + (platform_width / 2)
 
-		obstacles.append(start_platform)
-		add_child(start_platform)
-		var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
+		obstacles.append(platform)
+		add_child(platform)
+		x = x + platform_width
 
-		start_of_platform_x = x + gap_width
-		x = start_of_platform_x
-
-	while x <= in_bounds_width/2:
-		var is_start_of_gap = randf_range(0, 1) <= PROBABILITY_OF_GAP
-		var at_end_platform =  (in_bounds_width/2  - x) < MIN_OBSTACLE_WIDTH
-		if (at_end_platform):
-			var platform : Obstacle = obstacle_scene.instantiate()
-			var platform_width = in_bounds_width/2 - start_of_platform_x
-			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
-
-			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
-			
-			var sprite : Sprite2D = platform.find_child("Sprite2D")
-			var platform_sprite_width = sprite.texture.get_size().x
-			var platform_sprite_height = sprite.texture.get_size().y
-
-			platform.scale.x = platform_width / platform_sprite_width
-			platform.scale.y = platform_height / platform_sprite_height
-
-			obstacles.append(platform)
-			add_child(platform)
-			break
-		if (is_start_of_gap):
-			var platform : Obstacle = obstacle_scene.instantiate()
-			var platform_width = x - start_of_platform_x
-			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
-
-			if (platform_width < MIN_OBSTACLE_WIDTH):
-				x+= 1
-				continue
-			
-			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
-
-			# TODO: add variable height
-			var sprite : Sprite2D = platform.find_child("Sprite2D")
-			var platform_sprite_width = sprite.texture.get_size().x
-			var platform_sprite_height = sprite.texture.get_size().y
-
-			platform.scale.x = platform_width / platform_sprite_width
-			platform.scale.y = platform_height / platform_sprite_height
-
-			var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
-
-			start_of_platform_x = x + gap_width
-			x = start_of_platform_x
-			obstacles.append(platform)
-			add_child(platform)
-		else:
-			x+= 1
-
+		# draw gap after platform
+		var gap_width = randi_range(MIN_GAP_SIZE, min(distance_to_right_barrier, MAX_GAP_SIZE))
+		x = x + gap_width
 
 func spawn_breakable_obstacle() -> void:
 	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
