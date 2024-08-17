@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED = 700.0
+@export var SPEED = 800.0
 @export var ACCELERATION = 50.0
 @export var BIG_SIZE_SCALE = 1.5
 @export var SMALL_SIZE_SCALE = 0.5
