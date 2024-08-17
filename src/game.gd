@@ -3,10 +3,10 @@ extends Node
 
 @export var SPEED = - Globals.IN_BOUNDS_HEIGHT / 4
 
-@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 7
-@export var MAX_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 3
-@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 10
-@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 6
+@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 8
+@export var MAX_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 4
+@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 30
+@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 10
 
 @export var PROBABILITY_OF_GAP = 0.3
 @export var MIN_SECS_BETWEEN_SPAWNS = 1.0
@@ -30,9 +30,8 @@ var curr_time_between_spawns = 0.0
 func _ready() -> void:
 	var player_sprite : Sprite2D = player.find_child("Sprite2D")
 	var player_sprite_x = player_sprite.texture.get_size().x
-	MIN_GAP_SIZE = player_sprite_x * 0.5
-	MAX_GAP_SIZE = player_sprite_x * 0.8
-
+	MIN_GAP_SIZE = player_sprite_x * Globals.MEDIUM_SIZE_SCALE * 0.15
+	MAX_GAP_SIZE = player_sprite_x * Globals.MEDIUM_SIZE_SCALE * 0.45
 	Globals.score = 0
 	spawn_barrier_with_gaps()
 
@@ -107,8 +106,7 @@ func spawn_breakable_obstacle() -> void:
 	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
 	
 	var platform_width = Globals.IN_BOUNDS_WIDTH
-	
-	var platform_height = randi_range(100, 200)
+	var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 
 	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 	
