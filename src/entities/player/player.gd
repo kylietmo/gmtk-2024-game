@@ -56,5 +56,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is BreakableObstacle and current_size == sizes.LARGE:
 		body.queue_free()
 		Globals.score += 1
-	else:
-		get_tree().change_scene_to_file("res://menus/game_over_screen/game_over_screen.tscn")
+	#else:
+		#get_tree().change_scene_to_file("res://menus/game_over_screen/game_over_screen.tscn")
