@@ -2,7 +2,7 @@ extends Node2D
 
 @export var MIN_SECS_BETWEEN_SPAWNS = 0.85
 @export var MAX_SECS_BETWEEN_SPAWNS = 1.5
-@export var SPEED = -500.0
+@export var SPEED = -400.0
 @onready var player = $Player
 
 const MIN_GAP_SIZE = 150
@@ -11,7 +11,6 @@ const MAX_GAP_SIZE = 400
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
 var curr_time_between_spawns = 0.0
 var obstacles : Array[CharacterBody2D] = []
-var double_platform_scene = preload("res://entities/double_platform/double_platform.tscn")
 var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
 
 
