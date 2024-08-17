@@ -32,8 +32,6 @@ func _ready() -> void:
 	var player_sprite_x = player_sprite.texture.get_size().x
 	MIN_GAP_SIZE = player_sprite_x * 0.5
 	MAX_GAP_SIZE = player_sprite_x * 0.8
-	print(MIN_GAP_SIZE)
-	print(MAX_GAP_SIZE)
 
 	Globals.score = 0
 	spawn_barrier_with_gaps()
@@ -83,7 +81,7 @@ func spawn_barrier_with_gaps() -> void:
 		var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 		
 		platform.position.x = x + (platform_width / 2)
-		platform.position.y = Globals.RIGHT_BARRIER_X + OBSTACLE_SPAWN_OFFSET
+		platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 
 		var sprite : Sprite2D = platform.find_child("Sprite2D")
 		var platform_sprite_width = sprite.texture.get_size().x
