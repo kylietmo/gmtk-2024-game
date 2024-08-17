@@ -13,6 +13,12 @@ size = Vector2(77, 25)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
+MIN_NUM_GAPS = null
+MAX_NUM_GAPS = null
+PROBABILITY_OF_GAP = null
+MIN_SECS_BETWEEN_SPAWNS = null
+MAX_SECS_BETWEEN_SPAWNS = null
+BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = null
 
 [node name="Player" parent="." instance=ExtResource("2_761th")]
 unique_name_in_owner = true
@@ -46,10 +52,10 @@ shape = SubResource("RectangleShape2D_stmys")
 
 [node name="Score" type="Label" parent="."]
 z_index = 1000
-offset_left = -788.0
-offset_top = -535.0
-offset_right = -698.0
-offset_bottom = -501.0
+offset_left = -306.0
+offset_top = -484.0
+offset_right = -216.0
+offset_bottom = -450.0
 theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 horizontal_alignment = 1

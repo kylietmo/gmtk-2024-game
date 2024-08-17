@@ -1,32 +1,39 @@
 extends Node
 
-@export var SPEED = -300.0
 
-@export var MIN_GAP_SIZE = 100
-@export var MAX_GAP_SIZE = 150
+@export var SPEED = - Globals.IN_BOUNDS_HEIGHT / 4
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
-@export var MIN_OBSTACLE_WIDTH = 200
-@export var MIN_OBSTACLE_HEIGHT = 50
-@export var MAX_OBSTACLE_HEIGHT = 150
+@export var MIN_OBSTACLE_WIDTH = Globals.IN_BOUNDS_WIDTH / 10
+@export var MIN_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 40
+@export var MAX_OBSTACLE_HEIGHT = Globals.IN_BOUNDS_HEIGHT / 25
 @export var PROBABILITY_OF_GAP = 0.3
 @export var MIN_SECS_BETWEEN_SPAWNS = 1.0
 @export var MAX_SECS_BETWEEN_SPAWNS = 2.0
+@export var OBSTACLE_SPAWN_OFFSET = Globals.IN_BOUNDS_HEIGHT / 10
+@export var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.25
 
 @onready var player : Player = %Player
+
+var MIN_GAP_SIZE
+var MAX_GAP_SIZE
 
 var obstacles : Array[CharacterBody2D] = []
 var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
-
-const BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.25
-const OBSTACLE_SPAWN_OFFSET = 200
 
 var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
 var curr_time_between_spawns = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var player_sprite : Sprite2D = player.find_child("Sprite2D")
+	var player_sprite_x = player_sprite.texture.get_size().x
+	MIN_GAP_SIZE = player_sprite_x * 0.5
+	MAX_GAP_SIZE = player_sprite_x * 0.8
+	print(MIN_GAP_SIZE)
+	print(MAX_GAP_SIZE)
+
 	Globals.score = 0
 	spawn_barrier_with_gaps()
 
@@ -36,11 +43,11 @@ func _process(delta: float) -> void:
 	
 	match player.current_size:
 		player.sizes.SMALL:
-			SPEED = -1200
+			SPEED = -Globals.IN_BOUNDS_HEIGHT
 		player.sizes.MEDIUM:
-			SPEED = -300
+			SPEED = -Globals.IN_BOUNDS_HEIGHT / 4
 		player.sizes.LARGE:
-			SPEED = -200
+			SPEED = -Globals.IN_BOUNDS_HEIGHT / 5
 	
 	# Update all existing obstacles to be moving up. 
 	# TODO: If/when we change the direction of the level we'd need

@@ -1,9 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
-@export var SPEED = 1000.0
-@export var ACCELERATION = 200.0
-@export var DECELERATION = 200.0
+@export var SPEED = Globals.IN_BOUNDS_WIDTH
+@export var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 5
+@export var DECELERATION = Globals.IN_BOUNDS_WIDTH / 5
+@export var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25
 @export var LARGE_SIZE_SCALE = 1.75
 @export var MEDIUM_SIZE_SCALE = 1.0
 @export var SMALL_SIZE_SCALE = 0.15
@@ -23,9 +24,9 @@ enum sizes {
 @onready var current_size = sizes.MEDIUM
 
 func _ready() -> void:
-	position.y = Globals.PLAYER_START_Y
 	scale = MEDIUM_SCALE_VEC
-
+	position.y = Globals.PLAYER_START_Y
+	
 func _physics_process(delta: float) -> void:
 	var tween = create_tween()
 	

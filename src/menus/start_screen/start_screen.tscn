@@ -13,10 +13,10 @@ script = ExtResource("1_ejrxe")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 64.0
-offset_right = 768.0
-offset_bottom = 192.0
+offset_left = 96.0
+offset_top = 192.0
+offset_right = 704.0
+offset_bottom = 320.0
 theme_override_font_sizes/font_size = 60
 text = "GET THERE"
 horizontal_alignment = 1
@@ -24,19 +24,19 @@ vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 128.0
-offset_top = 256.0
-offset_right = 1024.0
-offset_bottom = 384.0
+offset_left = 96.0
+offset_top = 400.0
+offset_right = 704.0
+offset_bottom = 528.0
 theme_override_font_sizes/font_size = 48
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 128.0
-offset_top = 448.0
-offset_right = 1024.0
-offset_bottom = 576.0
+offset_left = 96.0
+offset_top = 600.0
+offset_right = 704.0
+offset_bottom = 728.0
 theme_override_font_sizes/font_size = 48
 text = "Quit"
 
