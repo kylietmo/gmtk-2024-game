@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var SPEED = -700.0
 
@@ -7,10 +7,13 @@ extends Node2D
 @export var MIN_NUM_GAPS = 1
 @export var MAX_NUM_GAPS = 4
 
-@onready var player : Player = $Player
+@onready var player : Player = %Player
 
 var obstacles : Array[CharacterBody2D] = []
 var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
+var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
+
+const BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.25
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -94,6 +97,24 @@ func spawn_barrier_with_gaps() -> void:
 		else:
 			x+= 1
 
+func spawn_breakable_obstacle() -> void:
+	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
+	
+	var platform_width = get_viewport().size.x - 2*Globals.BARRIER_OFFSET
+	var platform_height = randi_range(100, 200)
+
+	platform.position.y = get_viewport().size.y
+	
+	var sprite : Sprite2D = platform.find_child("Sprite2D")
+	var platform_sprite_width = sprite.texture.get_size().x
+	var platform_sprite_height = sprite.texture.get_size().y
+
+	platform.scale.x = platform_width / platform_sprite_width
+	platform.scale.y = platform_height / platform_sprite_height
+	
+	obstacles.append(platform)
+	add_child(platform)
+
 func adjust_barriers() -> void:
 	var viewport_width = get_viewport().size.x
 	$Barriers/LeftWall.position.x = viewport_width / 2 * -1 + Globals.BARRIER_OFFSET
@@ -104,11 +125,17 @@ func _on_child_exiting_tree(node: Node) -> void:
 		obstacles.erase(node)
 
 func _on_spawn_threshold_area_body_entered(body: Node2D) -> void:
+	var rand = randf()
 	if body is Obstacle:
-		spawn_barrier_with_gaps()
-
+		if rand <= BREAKABLE_OBSTACLE_SPAWN_PROBABILITY:
+			spawn_breakable_obstacle()
+		else:
+			spawn_barrier_with_gaps()
 
 func _on_score_area_body_exited(body: Node2D) -> void:
 	if body is Obstacle:
-		Globals.score += 1
-		$Score.text = "Score: " + str(Globals.score)
+		increment_score()
+
+func increment_score() -> void:
+	Globals.score += 1
+	$Score.text = "Score: " + str(Globals.score)
