@@ -175,4 +175,3 @@ func _on_score_area_body_exited(body: Node2D) -> void:
 
 func increment_score() -> void:
 	Globals.score += 1
-	$Score.text = "Score: " + str(Globals.score)
