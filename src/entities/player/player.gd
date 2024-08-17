@@ -23,7 +23,7 @@ enum sizes {
 @onready var current_size = sizes.MEDIUM
 
 func _ready() -> void:
-	position.y = get_viewport().size.y * -0.25
+	position.y = Globals.PLAYER_START_Y
 	scale = MEDIUM_SCALE_VEC
 
 func _physics_process(delta: float) -> void:

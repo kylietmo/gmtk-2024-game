@@ -21,7 +21,6 @@ const BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.25
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Globals.score = 0
-	adjust_barriers()
 	spawn_barrier_with_gaps()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,10 +41,7 @@ func _process(delta: float) -> void:
 			o.position.y += delta * SPEED
 
 func spawn_barrier_with_gaps() -> void:
-	var viewport = get_viewport()
-	var viewport_width = viewport.size.x
-	var viewport_height = viewport.size.y
-	var in_bounds_width = viewport_width - 2 * Globals.BARRIER_OFFSET
+	var in_bounds_width = Globals.IN_BOUNDS_WIDTH
 	var bounds_center_pos_x =  in_bounds_width/2
 
 	var start_of_platform_x = -in_bounds_width/2
@@ -57,7 +53,7 @@ func spawn_barrier_with_gaps() -> void:
 		var start_platform_size = 5
 		
 		start_platform.position.x = start_of_platform_x + (start_platform_size / 2)
-		start_platform.position.y = viewport_height
+		start_platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
 		var sprite : Sprite2D = start_platform.find_child("Sprite2D")
 		var platform_sprite_width = sprite.texture.get_size().x
 		var platform_sprite_height = sprite.texture.get_size().y
@@ -81,7 +77,8 @@ func spawn_barrier_with_gaps() -> void:
 			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
 			
 			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = viewport_height
+			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+			
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
 			var platform_sprite_width = sprite.texture.get_size().x
 			var platform_sprite_height = sprite.texture.get_size().y
@@ -93,9 +90,6 @@ func spawn_barrier_with_gaps() -> void:
 			add_child(platform)
 			break
 		if (is_start_of_gap):
-			print ("-------------")
-			print ("STARTING GAP")
-			print ("X: ", x)
 			var platform : Obstacle = obstacle_scene.instantiate()
 			var platform_width = x - start_of_platform_x
 			var platform_height = randi_range(MIN_OBSTACLE_HEIGHT, MAX_OBSTACLE_HEIGHT)
@@ -104,11 +98,10 @@ func spawn_barrier_with_gaps() -> void:
 				x+= 1
 				continue
 			
-			print ("Platform width: ", platform_width)
 			platform.position.x = start_of_platform_x + (platform_width / 2)
-			platform.position.y = viewport_height
-			print ("Platform x position: ", platform.position.x)
-			 #TODO: add variable height
+			platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+
+			# TODO: add variable height
 			var sprite : Sprite2D = platform.find_child("Sprite2D")
 			var platform_sprite_width = sprite.texture.get_size().x
 			var platform_sprite_height = sprite.texture.get_size().y
@@ -117,7 +110,7 @@ func spawn_barrier_with_gaps() -> void:
 			platform.scale.y = platform_height / platform_sprite_height
 
 			var gap_width = randi_range(MIN_GAP_SIZE, MAX_GAP_SIZE)
-			print("Gap width: ", gap_width)
+
 			start_of_platform_x = x + gap_width
 			x = start_of_platform_x
 			obstacles.append(platform)
@@ -129,10 +122,11 @@ func spawn_barrier_with_gaps() -> void:
 func spawn_breakable_obstacle() -> void:
 	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
 	
-	var platform_width = get_viewport().size.x - 2*Globals.BARRIER_OFFSET
+	var platform_width = Globals.IN_BOUNDS_WIDTH
+	
 	var platform_height = randi_range(100, 200)
 
-	platform.position.y = get_viewport().size.y
+	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2
 	
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
@@ -143,11 +137,6 @@ func spawn_breakable_obstacle() -> void:
 	
 	obstacles.append(platform)
 	add_child(platform)
-
-func adjust_barriers() -> void:
-	var viewport_width = get_viewport().size.x
-	$Barriers/LeftWall.position.x = viewport_width / 2 * -1 + Globals.BARRIER_OFFSET
-	$Barriers/RightWall.position.x = viewport_width / 2 - Globals.BARRIER_OFFSET
 	
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is Obstacle:

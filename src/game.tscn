@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://da47do0euyldr"]
+[gd_scene load_steps=10 format=3 uid="uid://da47do0euyldr"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
 [ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
 [ext_resource type="Script" path="res://score_area.gd" id="5_1bc0v"]
+[ext_resource type="Script" path="res://spawn_threshold_area.gd" id="5_wdpwl"]
+[ext_resource type="Script" path="res://score.gd" id="6_8tjsl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irenq"]
 size = Vector2(73, 39)
@@ -17,6 +19,7 @@ script = ExtResource("1_qfrmy")
 
 [node name="Player" parent="." instance=ExtResource("2_761th")]
 unique_name_in_owner = true
+position = Vector2(0, -160)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -37,6 +40,7 @@ parameters/looping = true
 
 [node name="SpawnThresholdArea" type="Area2D" parent="."]
 position = Vector2(-72, -81)
+script = ExtResource("5_wdpwl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnThresholdArea"]
 position = Vector2(-426.5, 82)
@@ -58,6 +62,8 @@ offset_right = -354.0
 offset_bottom = -291.0
 theme_override_font_sizes/font_size = 24
 text = "Score: 0"
+horizontal_alignment = 1
+script = ExtResource("6_8tjsl")
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
