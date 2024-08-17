@@ -1,7 +1,5 @@
 extends Node2D
 
-@export var MIN_SECS_BETWEEN_SPAWNS = 0.5
-@export var MAX_SECS_BETWEEN_SPAWNS = 0.8
 @export var SPEED = -500.0
 
 @export var MIN_GAP_SIZE = 100
@@ -11,36 +9,24 @@ extends Node2D
 
 @onready var player : Player = $Player
 
-var time_until_next_spawn = MIN_SECS_BETWEEN_SPAWNS
-var curr_time_between_spawns = 0.0
 var obstacles : Array[CharacterBody2D] = []
 var obstacle_scene = preload("res://entities/obstacle/obstacle.tscn")
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	adjust_barriers()
 	spawn_barrier_with_gaps()
-	determine_time_until_next_obstacle_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	curr_time_between_spawns += delta
-	
 	# TODO: tweak spawn rate based on sizes
 	match player.current_size:
 		player.sizes.SMALL:
 			SPEED = -700
-			MIN_SECS_BETWEEN_SPAWNS = 0.4
-			MAX_SECS_BETWEEN_SPAWNS = 0.6
 		player.sizes.MEDIUM:
 			SPEED = -500
-			MIN_SECS_BETWEEN_SPAWNS = 0.5
-			MAX_SECS_BETWEEN_SPAWNS = 0.8
 		player.sizes.LARGE:
 			SPEED = -300
-			MIN_SECS_BETWEEN_SPAWNS = 2.0
-			MAX_SECS_BETWEEN_SPAWNS = 3.0
 	
 	# Update all existing obstacles to be moving up. 
 	# TODO: If/when we change the direction of the level we'd need
@@ -48,12 +34,6 @@ func _process(delta: float) -> void:
 	for o in obstacles:
 		if is_instance_valid(o):
 			o.position.y += delta * SPEED
-
-	# Check to see if it's time to spawn a new platform. 
-	if curr_time_between_spawns >= time_until_next_spawn:
-		curr_time_between_spawns = 0.0
-		spawn_barrier_with_gaps()
-		determine_time_until_next_obstacle_spawn()
 
 func spawn_barrier_with_gaps() -> void:
 	var viewport = get_viewport()
@@ -119,10 +99,6 @@ func spawn_barrier_with_gaps() -> void:
 		else:
 			x+= 1
 
-func determine_time_until_next_obstacle_spawn() -> void:
-	var rand = randf_range(MIN_SECS_BETWEEN_SPAWNS, MAX_SECS_BETWEEN_SPAWNS)
-	time_until_next_spawn = rand
-	
 func adjust_barriers() -> void:
 	var viewport_width = get_viewport().size.x
 	$Barriers/LeftWall.position.x = viewport_width / 2 * -1 + Globals.BARRIER_OFFSET
@@ -131,3 +107,7 @@ func adjust_barriers() -> void:
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is Obstacle:
 		obstacles.erase(node)
+
+func _on_spawn_threshold_area_body_entered(body: Node2D) -> void:
+	if body is Obstacle:
+		spawn_barrier_with_gaps()
