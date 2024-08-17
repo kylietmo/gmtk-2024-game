@@ -96,3 +96,6 @@ func adjust_barriers() -> void:
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is Obstacle:
 		obstacles.erase(node)
+#
+#func _on_audio_stream_player_2d_finished() -> void:
+	#$AudioStreamPlayer2D.play()
