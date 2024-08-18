@@ -9,6 +9,7 @@ extends Camera2D
 var shake_strength = 0.0
 var camera_y_offset = Globals.IN_BOUNDS_HEIGHT / 15
 var starting_y_position : float
+var movement_allowed = true
 
 func _ready() -> void:
 	starting_y_position = position.y
@@ -16,13 +17,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("size_small") and player.current_size != player.sizes.SMALL and player.current_size != player.sizes.MASSIVE:
-		apply_small_shake()
-		position.y -= camera_y_offset
-		$CameraResetTimer.start(player.SMALL_SIZE_DURATION + 2*player.SIZE_TRANSITION_DURATION)
+		if movement_allowed:
+			apply_small_shake()
+			position.y -= camera_y_offset
+			movement_allowed = false
+			$CameraResetTimer.start(player.SMALL_SIZE_DURATION + 2*player.SIZE_TRANSITION_DURATION)
 		
 	if Input.is_action_just_pressed("size_large") and player.current_size != player.sizes.LARGE and player.current_size != player.sizes.MASSIVE:
-		position.y += camera_y_offset
-		$CameraResetTimer.start(player.LARGE_SIZE_DURATION + 2*player.SIZE_TRANSITION_DURATION)
+		if movement_allowed:
+			position.y += camera_y_offset
+			movement_allowed = false
+			$CameraResetTimer.start(player.LARGE_SIZE_DURATION + 2*player.SIZE_TRANSITION_DURATION)
 
 	if shake_strength > 0:
 		shake_strength = lerpf(shake_strength, 0, SHAKE_FADE * delta)
@@ -43,3 +48,4 @@ func random_offset() -> Vector2:
 
 func _on_camera_reset_timer_timeout() -> void:
 	position.y = starting_y_position
+	movement_allowed = true
