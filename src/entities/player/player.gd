@@ -29,6 +29,7 @@ enum sizes {
 }
 
 @onready var current_size = sizes.MEDIUM
+@onready var can_change_size = true
 @onready var is_invulnerable = false
 
 var size_tween : Tween
@@ -38,7 +39,8 @@ func _ready() -> void:
 	position.y = Globals.PLAYER_START_Y
 	
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("size_small") and not is_invulnerable:
+	if Input.is_action_just_pressed("size_small") and not is_invulnerable and can_change_size:
+		can_change_size = false
 		if size_tween:
 			size_tween.kill()
 		size_tween = create_tween()
@@ -50,7 +52,8 @@ func _physics_process(delta: float) -> void:
 		size_tween.connect("finished", _on_size_tween_finished)
 		SPRITE.texture = SMALL_SPRITE_TEXTURE
 
-	if Input.is_action_just_pressed("size_large") and not is_invulnerable:
+	if Input.is_action_just_pressed("size_large") and not is_invulnerable and can_change_size:
+		can_change_size = false
 		if size_tween:
 			size_tween.kill()
 		size_tween = create_tween()
@@ -90,6 +93,7 @@ func become_invulnerable():
 	
 
 func _on_size_tween_finished():
+	can_change_size = true
 	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
 
