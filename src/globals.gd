@@ -32,3 +32,14 @@ func _ready():
 	LARGE_SIZE_SCALE = 3 * IN_BOUNDS_WIDTH / 1980
 	MEDIUM_SIZE_SCALE = 1.5 * IN_BOUNDS_WIDTH / 1980
 	SMALL_SIZE_SCALE = 0.5 * IN_BOUNDS_WIDTH / 1980
+	
+func save_high_score(score: int):
+	var high_score_file = FileAccess.open("user://high_score.dat", FileAccess.WRITE)
+	high_score_file.store_16(score)
+
+func load_high_score():
+	var high_score_file = FileAccess.open("user://high_score.dat", FileAccess.READ)
+	if not high_score_file:
+		return -1
+		
+	return high_score_file.get_16()
