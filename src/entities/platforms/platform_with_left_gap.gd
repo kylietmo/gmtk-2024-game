@@ -2,7 +2,7 @@ extends PlatformRow
 
 @onready var right_platform: Obstacle = $RightPlatform
 
-const GAP_WIDTH_SCALAR = .15
+const GAP_WIDTH_SCALAR = .2
 const MAX_ROTATION_DEGREES = 2.0
 
 # TODO: consider randomized height

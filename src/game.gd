@@ -24,22 +24,24 @@ var platform_midright_gap_scene = preload("res://entities/platforms/platform_wit
 var platform_right_gap_scene = preload("res://entities/platforms/platform_with_right_gap.tscn")
 var platform_double_edge_gap_scene = preload("res://entities/platforms/platform_with_two_edge_gaps.tscn")
 
-var obstacle_scenes : Array[Resource] = [
-	platform_one_gap_scene,
-	platforms_two_gaps_scene,
-	platform_triple_gap_scene,
-	platform_left_gap_scene,
-	platform_midleft_gap_scene,
-	platform_midright_gap_scene,
-	platform_right_gap_scene,
-	platform_double_edge_gap_scene
+var obstacle_scenes : Array[Dictionary] = [
+	{'scene': platform_one_gap_scene, 'probability': 0.125},
+	{'scene': platform_triple_gap_scene, 'probability': 0.125},
+	{'scene': platforms_two_gaps_scene, 'probability': 0.125},
+	{'scene': platform_left_gap_scene, 'probability': 0.125},
+	{'scene': platform_midleft_gap_scene, 'probability': 0.125},
+	{'scene': platform_midright_gap_scene, 'probability': 0.125},
+	{'scene': platform_right_gap_scene, 'probability': 0.125},
+	{'scene': platform_double_edge_gap_scene, 'probability': 0.125}
 ]
-
-#var obstacle_scenes : Array[Resource] = [platform_double_edge_gap_scene]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
 
-#var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.0
+func init_obstacle_resources() -> void:
+	for scene in obstacle_scenes:
+		var platform_row = PlatformRow.new()
+		platform_row.probability = 1.0 / obstacle_scenes.size()
+		platform_row.scene = scene
 
 func _ready() -> void:
 	Globals.score = 0
@@ -62,9 +64,17 @@ func _process(delta: float) -> void:
 			o.position.y += delta * SPEED
 
 func spawn_barrier_with_gaps() -> void:
-	var rand_idx = randi_range(0, obstacle_scenes.size() - 1)
-	var scene = obstacle_scenes[rand_idx]
-	var platform: Obstacle = scene.instantiate()
+	var rand_p = randf()
+	
+	var p_threshold = 0.0
+	var platform_scene = obstacle_scenes[0]['scene']
+	for o in obstacle_scenes:
+		p_threshold += o['probability']
+		if rand_p < p_threshold:
+			platform_scene = o['scene']
+			break
+	
+	var platform: Obstacle = platform_scene.instantiate()
 	
 	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2 + OBSTACLE_SPAWN_OFFSET
 	
