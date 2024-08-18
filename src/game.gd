@@ -35,7 +35,11 @@ var obstacle_scenes : Array[Resource] = [
 	platform_double_edge_gap_scene
 ]
 
+#var obstacle_scenes : Array[Resource] = [platform_double_edge_gap_scene]
+
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
+
+#var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.0
 
 func _ready() -> void:
 	Globals.score = 0

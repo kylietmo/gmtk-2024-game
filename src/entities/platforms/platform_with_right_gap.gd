@@ -3,6 +3,7 @@ extends PlatformRow
 @onready var left_platform: Obstacle = $LeftPlatform
 
 const GAP_WIDTH_SCALAR = .15
+const MAX_ROTATION_DEGREES = 10.0
 
 # TODO: consider randomized height
 func _ready():
@@ -17,3 +18,5 @@ func _ready():
 	left_platform.position.x = Globals.LEFT_BARRIER_X + platform_width / 2
 
 	left_platform.scale.x = platform_width / platform_sprite_width
+	
+	left_platform.rotation_degrees = randf_range(-MAX_ROTATION_DEGREES, MAX_ROTATION_DEGREES)
