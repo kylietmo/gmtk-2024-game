@@ -42,6 +42,7 @@ var obstacle_scenes : Array[Dictionary] = [
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.2
 var INVULNERABLE_CONSUMABLE_PROBABILITY = 0.1
+var INVULNERABILITY_SCORE_THRESHOLD = 10
 
 func init_obstacle_resources() -> void:
 	for scene in obstacle_scenes:
@@ -130,7 +131,7 @@ func spawn_obstacle() -> void:
 	else:
 		spawn_barrier_with_gaps()
 
-	if not player.is_invulnerable and rand <= INVULNERABLE_CONSUMABLE_PROBABILITY:
+	if not player.is_invulnerable and rand <= INVULNERABLE_CONSUMABLE_PROBABILITY and Globals.score >= INVULNERABILITY_SCORE_THRESHOLD:
 		var consumable : Area2D = invulnerability_consumable_scene.instantiate()
 		consumable.position.x = randi_range(Globals.LEFT_BARRIER_X + (Globals.IN_BOUNDS_WIDTH / 75), Globals.RIGHT_BARRIER_X - (Globals.IN_BOUNDS_WIDTH / 75))
 		consumable.position.y = Globals.IN_BOUNDS_HEIGHT / 2
