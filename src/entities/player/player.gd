@@ -97,8 +97,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.queue_free.call_deferred()
 	elif body is BreakableObstacle and current_size == sizes.LARGE:
 		body.queue_free.call_deferred()
-	#else:
-		#get_tree().change_scene_to_file.call_deferred("res://menus/game_over_screen/game_over_screen.tscn")
+	else:
+		get_tree().change_scene_to_file.call_deferred("res://menus/game_over_screen/game_over_screen.tscn")
 
 
 func _on_invulnerable_timer_timeout() -> void:
