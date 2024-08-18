@@ -1,7 +1,7 @@
 extends Camera2D
 
 @onready var SMALL_SHAKE_STRENGTH = Globals.IN_BOUNDS_HEIGHT / 100
-@onready var LARGE_SHAKE_STRENGTH = Globals.IN_BOUNDS_HEIGHT / 25
+@onready var LARGE_SHAKE_STRENGTH = Globals.IN_BOUNDS_HEIGHT / 20
 @onready var SHAKE_FADE = Globals.IN_BOUNDS_HEIGHT / 200
 
 var shake_strength = 0.0

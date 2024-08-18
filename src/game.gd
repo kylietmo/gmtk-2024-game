@@ -38,7 +38,7 @@ var obstacle_scenes : Array[Dictionary] = [
 	{'scene': platform_double_edge_gap_scene, 'probability': 0.1}
 ]
 
-var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 1.0 / (obstacle_scenes.size() + 1)
+var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.2
 
 func init_obstacle_resources() -> void:
 	for scene in obstacle_scenes:
