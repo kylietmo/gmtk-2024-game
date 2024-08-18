@@ -6,7 +6,7 @@ class_name Player
 @onready var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
 @onready var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25.0
 @onready var BOUNCE_VELOCITY_SCALAR = 0.8
-@onready var SIZE_TRANSITION_DURATION = 0.1
+@onready var SIZE_TRANSITION_DURATION = 0.1   
 @onready var SMALL_SIZE_DURATION = 0.15
 @onready var LARGE_SIZE_DURATION = 0.3
 @onready var INVULNERABILITY_DURATION = 2.0
@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 		size_tween.connect("finished", _on_size_tween_finished)
 		SPRITE.texture = SMALL_SPRITE_TEXTURE
+		$SpeedUpSound.play()
 
 	if Input.is_action_just_pressed("size_large") and not is_invulnerable and not is_cooling_down:
 		start_cooldown()
