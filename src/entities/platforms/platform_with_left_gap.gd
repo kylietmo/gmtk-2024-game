@@ -3,7 +3,7 @@ extends PlatformRow
 @onready var right_platform: Obstacle = $RightPlatform
 
 const GAP_WIDTH_SCALAR = .15
-const MAX_ROTATION_DEGREES = 10.0
+const MAX_ROTATION_DEGREES = 5.0
 
 # TODO: consider randomized height
 func _ready():

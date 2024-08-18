@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var SPEED = Globals.IN_BOUNDS_WIDTH * 1.2
+@onready var SPEED = Globals.IN_BOUNDS_WIDTH * 1.25
 @onready var ACCELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
 @onready var DECELERATION = Globals.IN_BOUNDS_WIDTH / 4.0
 @onready var PLAYER_SIZE = Globals.IN_BOUNDS_WIDTH / 25.0
