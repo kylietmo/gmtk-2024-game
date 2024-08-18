@@ -49,8 +49,9 @@ func init_obstacle_resources() -> void:
 func _ready() -> void:
 	Globals.score = 0
 	spawn_barrier_with_gaps()
+	assert_obstacle_probabilities()
 
-func _process(delta: float) -> void:		
+func _process(delta: float) -> void:
 	match player.current_size:
 		player.sizes.SMALL:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT
@@ -118,6 +119,11 @@ func spawn_obstacle() -> void:
 		spawn_breakable_obstacle()
 	else:
 		spawn_barrier_with_gaps()
+
+func assert_obstacle_probabilities() -> void:
+	var combined_weight : float = obstacle_scenes.reduce(func(sum, info): return sum + info['probability'], 0.0)
+
+	assert(snappedf(combined_weight, 0.001) == 1.0, "ERROR: probability weights in obstacle_scenes must add up to 1, received " + str(combined_weight))
 
 func _on_child_exiting_tree(node: Node) -> void:
 	if node is Obstacle:
