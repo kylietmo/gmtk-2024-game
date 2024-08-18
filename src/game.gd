@@ -59,7 +59,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match player.current_size:
 		player.sizes.SMALL:
-			SPEED = -Globals.IN_BOUNDS_HEIGHT
+			if player.is_dashing:
+				SPEED = -Globals.IN_BOUNDS_HEIGHT / 5
+			else:
+				SPEED = -Globals.IN_BOUNDS_HEIGHT
 		player.sizes.MEDIUM:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT / 2
 		player.sizes.LARGE:
