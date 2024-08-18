@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cc6kf2sn6epws" path="res://sprites/Breakableplatform.png" id="2_40e2b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbf0"]
-size = Vector2(829.098, 598.284)
+size = Vector2(829.098, 454.218)
 
 [node name="BreakableObstacle" type="CharacterBody2D"]
 scale = Vector2(2.62695, 0.310889)
@@ -14,7 +14,7 @@ script = ExtResource("1_na852")
 texture = ExtResource("2_40e2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.16171e-05, -19.2995)
+position = Vector2(-1.16171e-05, -6.43317)
 scale = Vector2(3.94445, 1.54378)
 shape = SubResource("RectangleShape2D_rgbf0")
 
