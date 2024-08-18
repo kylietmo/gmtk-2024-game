@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5yjda1eg7860"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_2ikmc"]
-[ext_resource type="Texture2D" uid="uid://bnkn6p1sk56og" path="res://sprites/circle.png" id="1_k83fh"]
+[ext_resource type="Texture2D" uid="uid://dlgpji2qeryk4" path="res://sprites/Normal-gnome.png" id="2_tddpp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1s5f2"]
 radius = 6.67893
@@ -11,8 +11,9 @@ script = ExtResource("1_2ikmc")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_k83fh")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_tddpp")
+region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
 
 [node name="Area2D" type="Area2D" parent="."]
 
