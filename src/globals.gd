@@ -6,7 +6,7 @@ signal score_changed
 		return score
 	set(value):
 		score = value
-		emit_signal("score_changed", value)
+		score_changed.emit(value)
  
 var SCREEN_WIDTH
 var SCREEN_HEIGHT
@@ -33,9 +33,9 @@ func _ready():
 	MEDIUM_SIZE_SCALE = 1.5 * IN_BOUNDS_WIDTH / 1980
 	SMALL_SIZE_SCALE = 0.5 * IN_BOUNDS_WIDTH / 1980
 	
-func save_high_score(score: int):
+func save_high_score(high_score: int):
 	var high_score_file = FileAccess.open("user://high_score.dat", FileAccess.WRITE)
-	high_score_file.store_16(score)
+	high_score_file.store_16(high_score)
 
 func load_high_score():
 	var high_score_file = FileAccess.open("user://high_score.dat", FileAccess.READ)

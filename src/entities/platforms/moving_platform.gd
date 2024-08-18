@@ -12,7 +12,6 @@ func _ready():
 	
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
-	var platform_sprite_height = sprite.texture.get_size().y
 	
 	var rand = randf()
 	if rand < .5:
@@ -24,7 +23,7 @@ func _ready():
 
 	platform.scale.x = platform_width / platform_sprite_width
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not platform:
 		return
 	if platform.position.x >= Globals.RIGHT_BARRIER_X - platform_width / 2:

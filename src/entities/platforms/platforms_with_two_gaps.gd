@@ -14,7 +14,6 @@ func _ready():
 	
 	var sprite : Sprite2D = left_platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
-	var platform_sprite_height = sprite.texture.get_size().y
 	
 	left_platform.position.x = Globals.LEFT_BARRIER_X + platform_width / 2
 	right_platform.position.x = Globals.RIGHT_BARRIER_X - platform_width / 2
