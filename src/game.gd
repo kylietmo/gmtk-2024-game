@@ -12,6 +12,7 @@ extends Node
 
 @onready var player : Player = %Player
 @onready var camera : Camera2D = %Camera2D
+@onready var crash_sound : AudioStreamPlayer2D = %CrashSound
 
 var obstacles : Array[CharacterBody2D] = []
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
@@ -132,3 +133,4 @@ func _on_passed_spawn_threshold() -> void:
 
 func _on_broke_platform() -> void:
 	camera.apply_large_shake()
+	crash_sound.play()
