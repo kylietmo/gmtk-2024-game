@@ -22,7 +22,11 @@ scale = Vector2(0.5, 0.5)
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(5, 5)
+position_smoothing_enabled = true
 script = ExtResource("3_o1o6s")
+
+[node name="CameraResetTimer" type="Timer" parent="Camera2D"]
+one_shot = true
 
 [node name="Barriers" type="Node2D" parent="."]
 script = ExtResource("3_7qo2x")
@@ -51,14 +55,14 @@ stream = ExtResource("9_lritj")
 
 [node name="Score" type="Label" parent="."]
 z_index = 1000
-offset_left = -306.0
-offset_top = -484.0
-offset_right = -216.0
-offset_bottom = -450.0
-theme_override_font_sizes/font_size = 24
+offset_left = -496.0
+offset_top = -600.0
+offset_right = -406.0
+offset_bottom = -566.0
 text = "Score: 0"
 horizontal_alignment = 1
 script = ExtResource("6_8tjsl")
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="timeout" from="Camera2D/CameraResetTimer" to="Camera2D" method="_on_camera_reset_timer_timeout"]
 [connection signal="finished" from="BackgroundMusic" to="." method="_on_audio_stream_player_2d_finished"]
