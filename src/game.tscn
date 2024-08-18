@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://da47do0euyldr"]
+[gd_scene load_steps=10 format=3 uid="uid://da47do0euyldr"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_qfrmy"]
 [ext_resource type="PackedScene" uid="uid://5yjda1eg7860" path="res://entities/player/player.tscn" id="2_761th"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
 [ext_resource type="Script" path="res://score.gd" id="6_8tjsl"]
+[ext_resource type="AudioStream" uid="uid://od18pco5khaq" path="res://audio/speed_up.mp3" id="7_3cvw3"]
+[ext_resource type="Script" path="res://speed_up_sound.gd" id="8_wghwh"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
@@ -30,10 +32,15 @@ position = Vector2(-860, 0)
 [node name="RightWall" parent="Barriers" instance=ExtResource("3_tlj01")]
 position = Vector2(860, 0)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ivb48")
 autoplay = true
 parameters/looping = true
+
+[node name="SpeedUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3cvw3")
+volume_db = -15.0
+script = ExtResource("8_wghwh")
 
 [node name="Score" type="Label" parent="."]
 z_index = 1000
@@ -47,4 +54,4 @@ horizontal_alignment = 1
 script = ExtResource("6_8tjsl")
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_audio_stream_player_2d_finished"]
