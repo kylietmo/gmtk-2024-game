@@ -11,6 +11,7 @@ extends Node
 @onready var OBSTACLE_SPAWN_OFFSET = Globals.IN_BOUNDS_HEIGHT / 10
 
 @onready var player : Player = %Player
+@onready var camera : Camera2D = %Camera2D
 
 var obstacles : Array[CharacterBody2D] = []
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
@@ -87,11 +88,11 @@ func spawn_breakable_obstacle() -> void:
 	
 	platform.connect("passed_score_threshold", _on_passed_score_threshold)
 	platform.connect("passed_spawn_threshold", _on_passed_spawn_threshold)
-	
-func _on_child_exiting_tree(node: Node) -> void:
-	if node is Obstacle:
-		obstacles.erase(node)
+	platform.connect("broke_platform", _on_broke_platform)
 
+func increment_score() -> void:
+	Globals.score += 1
+	
 func spawn_obstacle() -> void:
 	var rand = randf()
 	if rand <= BREAKABLE_OBSTACLE_SPAWN_PROBABILITY:
@@ -99,15 +100,19 @@ func spawn_obstacle() -> void:
 	else:
 		spawn_barrier_with_gaps()
 
+func _on_child_exiting_tree(node: Node) -> void:
+	if node is Obstacle:
+		obstacles.erase(node)
+		
 func _on_score_area_body_exited(body: Node2D) -> void:
 	if body is Obstacle:
 		increment_score()
-
-func increment_score() -> void:
-	Globals.score += 1
 
 func _on_passed_score_threshold() -> void:
 	increment_score()
 
 func _on_passed_spawn_threshold() -> void:
 	spawn_obstacle()
+
+func _on_broke_platform() -> void:
+	camera.apply_large_shake()
