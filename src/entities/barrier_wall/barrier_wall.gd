@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name BarrierWall
 
 func _ready() -> void:
 	var sprite_size = $Sprite2D.texture.get_size().y

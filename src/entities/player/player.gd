@@ -8,6 +8,7 @@ class_name Player
 @onready var SIZE_TRANSITION_DURATION = 0.1
 @onready var SMALL_SIZE_DURATION = 0.15
 @onready var LARGE_SIZE_DURATION = 0.3
+@onready var BOUNCE_VELOCITY_SCALAR = 0.8
 @onready var SPRITE  = $Sprite2D
 
 var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE)
@@ -55,12 +56,16 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
 	if current_size != sizes.MEDIUM:
 		velocity.x = 0
-	if direction:
+	elif direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION)
 
-	move_and_slide()
+	var collision_info = move_and_collide(velocity * delta)
+	
+	if collision_info:
+		velocity = velocity.bounce(collision_info.get_normal())
+		velocity.x *= BOUNCE_VELOCITY_SCALAR
 
 func _on_size_tween_finished():
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
