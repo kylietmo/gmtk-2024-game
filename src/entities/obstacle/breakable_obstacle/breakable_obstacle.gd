@@ -1,6 +1,5 @@
 extends PlatformRow
 class_name BreakableObstacle
-signal broke_platform
 
 func _process(_delta: float) -> void:
 	if not has_passed_spawn_threshold and position.y < SPAWN_THRESHOLD_Y:

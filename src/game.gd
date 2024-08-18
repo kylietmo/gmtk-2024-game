@@ -14,6 +14,8 @@ extends Node
 @onready var camera : Camera2D = %Camera2D
 @onready var crash_sound : AudioStreamPlayer2D = %CrashSound
 
+var invulnerability_consumable_scene = preload("res://entities/consumables/invulnerability.tscn")
+
 var obstacles : Array[CharacterBody2D] = []
 var breakable_obstacle_scene = preload("res://entities/obstacle/breakable_obstacle/breakable_obstacle.tscn")
 var platform_one_gap_scene = preload("res://entities/platforms/platform_with_one_gap.tscn")
@@ -39,6 +41,7 @@ var obstacle_scenes : Array[Dictionary] = [
 ]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.2
+var INVULNERABLE_CONSUMABLE_PROBABILITY = 0.1
 
 func init_obstacle_resources() -> void:
 	for scene in obstacle_scenes:
@@ -50,6 +53,7 @@ func _ready() -> void:
 	Globals.score = 0
 	spawn_barrier_with_gaps()
 	assert_obstacle_probabilities()
+	
 
 func _process(delta: float) -> void:
 	match player.current_size:
@@ -59,6 +63,8 @@ func _process(delta: float) -> void:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT / 2
 		player.sizes.LARGE:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT / 5
+		player.sizes.MASSIVE:
+			SPEED = -Globals.IN_BOUNDS_HEIGHT * 2
 	
 	# Update all existing obstacles to be moving up. 
 	# TODO: If/when we change the direction of the level we'd need
@@ -84,6 +90,10 @@ func spawn_barrier_with_gaps() -> void:
 	
 	(platform as PlatformRow).connect("passed_score_threshold", _on_passed_score_threshold)
 	(platform as PlatformRow).connect("passed_spawn_threshold", _on_passed_spawn_threshold)
+	
+	for child in platform.get_children():
+		if child is Obstacle:
+			child.connect("broke_platform", _on_broke_platform)
 	
 	obstacles.append(platform)
 	add_child.call_deferred(platform)
@@ -119,6 +129,12 @@ func spawn_obstacle() -> void:
 		spawn_breakable_obstacle()
 	else:
 		spawn_barrier_with_gaps()
+
+	if not player.is_invulnerable and rand <= INVULNERABLE_CONSUMABLE_PROBABILITY:
+		var consumable : Area2D = invulnerability_consumable_scene.instantiate()
+		consumable.position.x = randi_range(Globals.LEFT_BARRIER_X + (Globals.IN_BOUNDS_WIDTH / 75), Globals.RIGHT_BARRIER_X - (Globals.IN_BOUNDS_WIDTH / 75))
+		consumable.position.y = Globals.IN_BOUNDS_HEIGHT / 2
+		add_child.call_deferred(consumable)
 
 func assert_obstacle_probabilities() -> void:
 	var combined_weight : float = obstacle_scenes.reduce(func(sum, info): return sum + info['probability'], 0.0)
