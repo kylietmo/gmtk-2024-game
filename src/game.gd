@@ -102,16 +102,13 @@ func spawn_breakable_obstacle() -> void:
 	var platform : BreakableObstacle = breakable_obstacle_scene.instantiate()
 	
 	var platform_width = Globals.IN_BOUNDS_WIDTH
-	var platform_height =  Globals.IN_BOUNDS_HEIGHT / 10
 
 	platform.position.y = Globals.IN_BOUNDS_HEIGHT / 2.0 + OBSTACLE_SPAWN_OFFSET
 	
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
-	var platform_sprite_height = sprite.texture.get_size().y
 
 	platform.scale.x = platform_width / platform_sprite_width
-	platform.scale.y = platform_height / platform_sprite_height
 	
 	obstacles.append(platform)
 	add_child.call_deferred(platform)
