@@ -83,12 +83,14 @@ func become_invulnerable():
 		size_tween.kill()
 	size_tween = create_tween()
 	size_tween.tween_property(self, "scale", MASSIVE_SCALE_VEC, SIZE_TRANSITION_DURATION)
+	size_tween.parallel().tween_property(SPRITE, "rotation_degrees", 360, INVULNERABILITY_DURATION)
 	size_tween.parallel().tween_property(self, "current_size", sizes.MASSIVE, 0)
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
 	$InvulnerableTimer.start(INVULNERABILITY_DURATION)
 	
 
 func _on_size_tween_finished():
+	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
