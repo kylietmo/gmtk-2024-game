@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dixgeud2g0fie"]
+
+[ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_5h6ya"]
+[ext_resource type="Script" path="res://entities/platforms/platform_with_two_edge_gaps.gd" id="1_ifo3v"]
+
+[node name="PlatformWithTwoEdgeGaps" type="CharacterBody2D"]
+script = ExtResource("1_ifo3v")
+
+[node name="Platform" parent="." instance=ExtResource("1_5h6ya")]
