@@ -7,6 +7,7 @@
 size = Vector2(38.7533, 896.02)
 
 [node name="BarrierWall" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_f51uv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
