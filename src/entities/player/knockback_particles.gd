@@ -7,8 +7,8 @@ var AMOUNT = 2000
 var SPREAD = 100
 var LIFETIME = 0.5
 var SPEED_SCALE = 5
-var SCALE_MIN = 3
-var SCALE_MAX = 5
+var SCALE_MIN = 1
+var SCALE_MAX = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

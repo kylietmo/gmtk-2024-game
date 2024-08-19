@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwkntact5gieu"]
+[gd_scene load_steps=12 format=3 uid="uid://cwkntact5gieu"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_2ikmc"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="2_2t8ge"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://rrenmokorirt" path="res://audio/invulnerability.mp3" id="4_unk4v"]
 [ext_resource type="Script" path="res://entities/player/trail_particles.gd" id="6_k2enp"]
 [ext_resource type="Script" path="res://entities/player/knockback_particles.gd" id="7_dyrih"]
+[ext_resource type="Texture2D" uid="uid://btciurljpnn6s" path="res://sprites/Particle.png" id="7_uldd0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1s5f2"]
 radius = 6.67893
@@ -56,6 +57,7 @@ volume_db = 3.0
 [node name="TrailParticles" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 amount = 1000
+texture = ExtResource("7_uldd0")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_1bg2l")
@@ -64,6 +66,7 @@ script = ExtResource("6_k2enp")
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 amount = 1000
+texture = ExtResource("7_uldd0")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_1bg2l")
