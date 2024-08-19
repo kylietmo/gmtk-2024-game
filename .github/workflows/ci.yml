@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+    - main
+
+env:
+  PROJECT_PATH: src
+
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.2.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "HTML5" ../build/web/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: build/web
+      - name: Install rsync
+        run: |
+          apt-get update && apt-get install -y rsync
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: build/web
