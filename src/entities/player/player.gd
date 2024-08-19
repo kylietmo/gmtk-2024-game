@@ -52,36 +52,10 @@ func _physics_process(delta: float) -> void:
 		rotation_degrees += 1
 	
 	if Input.is_action_just_pressed("size_small") and not is_invulnerable and not is_cooling_down and not is_dashing:
-		start_cooldown(SIZE_COOLDOWN_DURATION)
-		current_rotation_degrees = rotation_degrees
-		rotation_degrees = 0
-		if size_tween:
-			size_tween.kill()
-		size_tween = create_tween()
-		size_tween.tween_property(self, "scale", SMALL_SCALE_VEC, SIZE_TRANSITION_DURATION)
-		size_tween.parallel().tween_property(self, "current_size", sizes.SMALL, 0)
-		size_tween.tween_interval(SMALL_SIZE_DURATION)
-		size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
-		size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
-		size_tween.connect("finished", _on_size_tween_finished)
-		SPRITE.texture = SMALL_SPRITE_TEXTURE
-		$SpeedUpSound.play()
+		become_small()
 
 	if Input.is_action_just_pressed("size_large") and not is_invulnerable and not is_cooling_down and not is_dashing:
-		current_rotation_degrees = rotation_degrees
-		rotation_degrees = 0
-		start_cooldown(SIZE_COOLDOWN_DURATION)
-		if size_tween:
-			size_tween.kill()
-		size_tween = create_tween()
-		size_tween.tween_property(self, "scale", LARGE_SCALE_VEC, SIZE_TRANSITION_DURATION)
-		size_tween.parallel().tween_property(self, "current_size", sizes.LARGE, 0)
-		size_tween.tween_interval(LARGE_SIZE_DURATION)
-		size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
-		size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
-		size_tween.connect("finished", _on_size_tween_finished)
-		SPRITE.texture = LARGE_SPRITE_TEXTURE
-		$SlowDownSound.play()
+		become_large()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
@@ -134,7 +108,42 @@ func become_invulnerable():
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
 	$InvulnerabilitySound.play()
 	$InvulnerableTimer.start(INVULNERABILITY_DURATION)
+
+func become_large(include_cooldown: bool = true) -> void:
+	current_rotation_degrees = rotation_degrees
+	rotation_degrees = 0
 	
+	if include_cooldown:
+		start_cooldown(SIZE_COOLDOWN_DURATION)
+	if size_tween:
+		size_tween.kill()
+	size_tween = create_tween()
+	size_tween.tween_property(self, "scale", LARGE_SCALE_VEC, SIZE_TRANSITION_DURATION)
+	size_tween.parallel().tween_property(self, "current_size", sizes.LARGE, 0)
+	size_tween.tween_interval(LARGE_SIZE_DURATION)
+	size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
+	size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
+	size_tween.connect("finished", _on_size_tween_finished)
+	SPRITE.texture = LARGE_SPRITE_TEXTURE
+	$SlowDownSound.play()
+
+func become_small() -> void:
+	start_cooldown(SIZE_COOLDOWN_DURATION)
+	current_rotation_degrees = rotation_degrees
+	rotation_degrees = 0
+	if size_tween:
+		size_tween.kill()
+	size_tween = create_tween()
+	size_tween.tween_property(self, "scale", SMALL_SCALE_VEC, SIZE_TRANSITION_DURATION)
+	size_tween.parallel().tween_property(self, "current_size", sizes.SMALL, 0)
+	size_tween.tween_interval(SMALL_SIZE_DURATION)
+	size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
+	size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
+	size_tween.connect("finished", _on_size_tween_finished)
+	SPRITE.texture = SMALL_SPRITE_TEXTURE
+	$SpeedUpSound.play()
+
+ 	
 func start_cooldown(duration: float):
 	is_cooling_down = true
 	$CooldownTimer.start(duration)
@@ -162,7 +171,8 @@ func _on_invulnerable_timer_timeout() -> void:
 	size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
 	size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 	size_tween.connect("finished", _on_size_tween_finished)
-
+	current_rotation_degrees = rotation_degrees
+	become_large(false)
 	is_invulnerable = false
 
 func _on_cooldown_timer_timeout() -> void:
