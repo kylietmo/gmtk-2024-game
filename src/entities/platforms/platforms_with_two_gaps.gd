@@ -12,9 +12,13 @@ func _ready():
 	var gap_width = Globals.IN_BOUNDS_WIDTH * GAP_WIDTH_SCALAR
 	var platform_width = (1 - (GAP_WIDTH_SCALAR * 2)) /3  * Globals.IN_BOUNDS_WIDTH
 	
+	left_platform.initialize_sprite()
+	middle_platform.initialize_sprite()
+	right_platform.initialize_sprite()
+
 	var sprite : Sprite2D = left_platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
-	
+
 	left_platform.position.x = Globals.LEFT_BARRIER_X + platform_width / 2
 	right_platform.position.x = Globals.RIGHT_BARRIER_X - platform_width / 2
 	middle_platform.position.x = Globals.LEFT_BARRIER_X + platform_width + gap_width + platform_width / 2

@@ -9,6 +9,8 @@ const GAP_WIDTH_SCALAR = .15
 func _ready():	
 	var left_platform_width = (1.0 - GAP_WIDTH_SCALAR) / 2 * Globals.IN_BOUNDS_WIDTH + (Globals.IN_BOUNDS_WIDTH / 4)
 	var right_platform_width = (1.0 - GAP_WIDTH_SCALAR) / 2 * Globals.IN_BOUNDS_WIDTH - (Globals.IN_BOUNDS_WIDTH / 4)
+	left_platform.initialize_sprite()
+	right_platform.initialize_sprite()
 
 	var sprite : Sprite2D = left_platform.find_child("Sprite2D")
 

@@ -10,6 +10,7 @@ func _ready():
 	platform_width = Globals.IN_BOUNDS_WIDTH / 3
 	platform_speed = platform_width / 50
 	
+	platform.initialize_sprite()
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
 	

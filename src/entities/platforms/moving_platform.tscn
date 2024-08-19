@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2ea67g1h83ki"]
+[gd_scene load_steps=4 format=3 uid="uid://b2ea67g1h83ki"]
 
 [ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_2gvtl"]
 [ext_resource type="Script" path="res://entities/platforms/moving_platform.gd" id="1_y6jcc"]
+[ext_resource type="Texture2D" uid="uid://donpqwen0r3lr" path="res://sprites/Small planet.png" id="3_txyef"]
 
 [node name="MovingPlatform" type="CharacterBody2D"]
 script = ExtResource("1_y6jcc")
 
 [node name="Platform" parent="." instance=ExtResource("1_2gvtl")]
+texture = ExtResource("3_txyef")

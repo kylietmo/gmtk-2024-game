@@ -11,6 +11,7 @@ func _ready():
 	
 	var platform_width = Globals.IN_BOUNDS_WIDTH - gap_width
 	
+	right_platform.initialize_sprite()
 	var sprite : Sprite2D = right_platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
 	
