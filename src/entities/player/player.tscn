@@ -45,6 +45,7 @@ stream = ExtResource("4_mvksk")
 
 [node name="InvulnerabilitySound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_unk4v")
+volume_db = 3.0
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 one_shot = true
