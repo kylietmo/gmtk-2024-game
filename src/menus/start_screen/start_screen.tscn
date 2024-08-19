@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://menus/start_screen/start_screen.gd" id="1_ejrxe"]
 [ext_resource type="Texture2D" uid="uid://dku7k27oqm8lk" path="res://sprites/Background.png" id="2_nesii"]
-[ext_resource type="FontFile" uid="uid://b545sn3yqme6s" path="res://fonts/PixelifySans-Regular.ttf" id="3_o75bh"]
 [ext_resource type="Texture2D" uid="uid://d0vqrm1ylrkxr" path="res://sprites/Bigsun.png" id="4_i20d8"]
+[ext_resource type="FontFile" uid="uid://bsikolrdw7kb2" path="res://fonts/slkscr.ttf" id="4_vl6ri"]
 [ext_resource type="Texture2D" uid="uid://6eidb0qokgqf" path="res://sprites/Smallstar.png" id="5_5u7vt"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="6_4uthh"]
 [ext_resource type="Script" path="res://menus/start_screen/sprite_2d.gd" id="10_ax0xi"]
@@ -53,8 +53,8 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
 theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
-theme_override_fonts/font = ExtResource("3_o75bh")
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("4_vl6ri")
+theme_override_font_sizes/font_size = 52
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xh51l")
 theme_override_styles/hover = SubResource("StyleBoxFlat_24tfq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_iaf2s")
@@ -67,8 +67,8 @@ alignment = 0
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
 theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
-theme_override_fonts/font = ExtResource("3_o75bh")
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("4_vl6ri")
+theme_override_font_sizes/font_size = 52
 theme_override_styles/focus = SubResource("StyleBoxEmpty_050v2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f3lvg")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_m1ryg")
@@ -91,7 +91,7 @@ grow_horizontal = 2
 [node name="Title" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("3_o75bh")
+theme_override_fonts/font = ExtResource("4_vl6ri")
 theme_override_font_sizes/font_size = 96
 text = "GET THERE"
 horizontal_alignment = 1
