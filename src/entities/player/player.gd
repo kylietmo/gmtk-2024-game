@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("dash") and direction != 0 and not is_cooling_down:
+	if Input.is_action_just_pressed("dash") and direction != 0 and not is_cooling_down and not is_invulnerable:
 		rotation_degrees = 0
 		if size_tween:
 			size_tween.kill()

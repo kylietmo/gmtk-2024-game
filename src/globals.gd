@@ -25,8 +25,8 @@ var MEDIUM_PLATFORM_TEXTURE = preload("res://sprites/Mediumplanet.png")
 var LARGE_PLATFORM_TEXTURE = preload("res://sprites/Big planet.png")
 
 func _ready():
-	SCREEN_WIDTH = get_window().size.x
-	SCREEN_HEIGHT = get_window().size.y
+	SCREEN_WIDTH = get_viewport_rect().size.x
+	SCREEN_HEIGHT = get_viewport_rect().size.y
 	BARRIER_OFFSET = SCREEN_WIDTH / 16
 	IN_BOUNDS_WIDTH = SCREEN_WIDTH - 2 * BARRIER_OFFSET
 	IN_BOUNDS_HEIGHT = SCREEN_HEIGHT
