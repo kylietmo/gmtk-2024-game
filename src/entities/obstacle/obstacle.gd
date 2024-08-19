@@ -3,13 +3,16 @@ class_name Obstacle
 signal broke_platform
 
 @export var DESPAWN_TIME = 1.0
-
 @export var texture : Texture
 
+@onready var sprite : Sprite2D = $Sprite2D
+@onready var collider: CollisionShape2D = $PillCollider
+
 func initialize_sprite():
-	var sprite = get_node("Sprite2D")
-	if (is_instance_valid(sprite)):	
+	if (is_instance_valid(sprite)):
 		sprite.texture = texture
+		collider.scale.x = sprite.texture.get_width() / collider.shape.get_rect().size.x
+		collider.scale.y = sprite.texture.get_height() / collider.shape.get_rect().size.y
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	# only free if exiting from the top of the screen
