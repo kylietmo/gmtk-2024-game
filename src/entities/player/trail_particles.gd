@@ -3,7 +3,7 @@ extends CPUParticles2D
 var GRAVITY = Vector2(0, -Globals.IN_BOUNDS_HEIGHT / 4)
 var DIRECTION = Vector2(0, -1)
 var INITIAL_VELOCITY = Globals.IN_BOUNDS_WIDTH / 10
-var AMOUNT = 1000
+var AMOUNT = 500
 var SPREAD = 100
 var LIFETIME = 2
 var SPEED_SCALE = 3
