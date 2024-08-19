@@ -8,7 +8,7 @@ class_name Player
 @onready var BOUNCE_VELOCITY_SCALAR = 0.8
 @onready var SIZE_TRANSITION_DURATION = 0.1
 @onready var DASH_TRANSITION_DURATION = 0.1
-@onready var SMALL_SIZE_DURATION = 0.15
+@onready var SMALL_SIZE_DURATION = 0.18
 @onready var LARGE_SIZE_DURATION = 0.3
 @onready var INVULNERABILITY_DURATION = 2.0
 @onready var SIZE_COOLDOWN_DURATION = 0.5
