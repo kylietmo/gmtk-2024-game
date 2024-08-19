@@ -13,8 +13,9 @@ func initialize_sprite(desired_width : float):
 		sprite.texture = texture
 		collider.scale.x = sprite.texture.get_width() / collider.shape.get_rect().size.x
 		
-		# Divide by 2 to account for the pill shape not overflowing the UFOs for now
-		collider.scale.y = sprite.texture.get_height() / collider.shape.get_rect().size.y / 2
+		# TODO: save our souls
+		collider.position.y -= sprite.texture.get_height() / 8
+		collider.scale.y = sprite.texture.get_height() / collider.shape.get_rect().size.y / 6
 		
 		var sprite_width = sprite.texture.get_size().x
 		var sprite_height = sprite.texture.get_size().y

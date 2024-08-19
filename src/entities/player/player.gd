@@ -159,7 +159,9 @@ func _on_size_tween_finished():
 	is_dashing = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if is_invulnerable and body is Obstacle:
+	if position.y > body.get_parent().position.y:
+		pass
+	elif is_invulnerable and body is Obstacle:
 		body.broke_platform.emit()
 		body.queue_free.call_deferred()
 	elif body is BreakableObstacle and current_size == sizes.LARGE:
