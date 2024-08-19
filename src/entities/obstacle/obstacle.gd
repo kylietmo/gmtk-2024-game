@@ -5,10 +5,10 @@ signal broke_platform
 @export var DESPAWN_TIME = 1.0
 @export var texture : Texture
 
-@onready var sprite : Sprite2D = $Sprite2D
-@onready var collider: CollisionShape2D = $PillCollider
-
 func initialize_sprite(desired_width : float):
+	var sprite : Sprite2D = $Sprite2D
+	var collider: CollisionShape2D = $PillCollider
+
 	if (is_instance_valid(sprite)):
 		sprite.texture = texture
 		collider.scale.x = sprite.texture.get_width() / collider.shape.get_rect().size.x
