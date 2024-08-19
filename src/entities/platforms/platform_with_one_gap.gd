@@ -7,10 +7,9 @@ const GAP_WIDTH_SCALAR = .15
 
 # TODO: consider randomized height
 func _ready():	
-	initialize_sprite()
 	var platform_width = (1.0 - GAP_WIDTH_SCALAR) / 2 * Globals.IN_BOUNDS_WIDTH
-	left_platform.initialize_sprite()
-	right_platform.initialize_sprite()
+	left_platform.initialize_sprite(platform_width)
+	right_platform.initialize_sprite(platform_width)
 	var sprite : Sprite2D = left_platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
 	

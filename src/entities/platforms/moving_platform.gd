@@ -10,9 +10,7 @@ func _ready():
 	platform_width = Globals.IN_BOUNDS_WIDTH / 2
 	platform_speed = platform_width / 50
 	
-	platform.initialize_sprite()
-	var sprite : Sprite2D = platform.find_child("Sprite2D")
-	var platform_sprite_width = sprite.texture.get_size().x
+	platform.initialize_sprite(platform_width)
 	
 	var rand = randf()
 	if rand < .5:
@@ -21,8 +19,6 @@ func _ready():
 	else:
 		platform_direction = -1
 		platform.position.x = Globals.RIGHT_BARRIER_X - platform_width / 2
-
-	platform.scale.x = platform_width / platform_sprite_width
 
 func _physics_process(_delta: float) -> void:
 	if not platform:
