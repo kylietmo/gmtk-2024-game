@@ -40,14 +40,21 @@ enum sizes {
 @onready var is_dashing = false
 
 var size_tween : Tween
+var current_rotation_degrees := 0.0
 
 func _ready() -> void:
 	scale = MEDIUM_SCALE_VEC
 	position.y = Globals.PLAYER_START_Y
 	
 func _physics_process(delta: float) -> void:
+	
+	if current_size == sizes.MEDIUM:
+		rotation_degrees += 1
+	
 	if Input.is_action_just_pressed("size_small") and not is_invulnerable and not is_cooling_down and not is_dashing:
 		start_cooldown(SIZE_COOLDOWN_DURATION)
+		current_rotation_degrees = rotation_degrees
+		rotation_degrees = 0
 		if size_tween:
 			size_tween.kill()
 		size_tween = create_tween()
@@ -61,6 +68,8 @@ func _physics_process(delta: float) -> void:
 		$SpeedUpSound.play()
 
 	if Input.is_action_just_pressed("size_large") and not is_invulnerable and not is_cooling_down and not is_dashing:
+		current_rotation_degrees = rotation_degrees
+		rotation_degrees = 0
 		start_cooldown(SIZE_COOLDOWN_DURATION)
 		if size_tween:
 			size_tween.kill()
@@ -78,6 +87,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
 	
 	if Input.is_action_just_pressed("dash") and direction != 0 and not is_cooling_down:
+		rotation_degrees = 0
 		if size_tween:
 			size_tween.kill()
 			
@@ -132,6 +142,7 @@ func start_cooldown(duration: float):
 func _on_size_tween_finished():
 	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
+	rotation_degrees = current_rotation_degrees
 	is_dashing = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
