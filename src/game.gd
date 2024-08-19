@@ -41,8 +41,8 @@ var obstacle_scenes : Array[Dictionary] = [
 ]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.2
-var INVULNERABLE_CONSUMABLE_PROBABILITY = 1
-var INVULNERABILITY_SCORE_THRESHOLD = 1
+var INVULNERABLE_CONSUMABLE_PROBABILITY = 0.1
+var INVULNERABILITY_SCORE_THRESHOLD = 10
 
 func init_obstacle_resources() -> void:
 	for scene in obstacle_scenes:
