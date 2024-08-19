@@ -97,6 +97,7 @@ func _physics_process(delta: float) -> void:
 		size_tween.parallel().tween_property(self, "is_dashing", false, 0)
 		size_tween.connect("finished", _on_size_tween_finished)
 		SPRITE.texture = SMALL_SPRITE_TEXTURE
+		$SpeedUpSound.play()
 	
 	if current_size == sizes.SMALL:
 		velocity.x = 0
