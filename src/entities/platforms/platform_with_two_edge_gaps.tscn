@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_5h6ya"]
 [ext_resource type="Script" path="res://entities/platforms/platform_with_two_edge_gaps.gd" id="1_ifo3v"]
-[ext_resource type="Texture2D" uid="uid://b58jpagk3pfwi" path="res://sprites/Big planet.png" id="3_bqhev"]
+[ext_resource type="Texture2D" uid="uid://sp0kh5aq5x87" path="res://sprites/Updatedplanet.png" id="3_femi6"]
 
 [node name="PlatformWithTwoEdgeGaps" type="CharacterBody2D"]
 script = ExtResource("1_ifo3v")
 
 [node name="Platform" parent="." instance=ExtResource("1_5h6ya")]
-texture = ExtResource("3_bqhev")
+texture = ExtResource("3_femi6")

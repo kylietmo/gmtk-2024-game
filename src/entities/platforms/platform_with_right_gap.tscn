@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://kxalargknswc" path="res://entities/obstacle/obstacle.tscn" id="1_f3s07"]
 [ext_resource type="Script" path="res://entities/platforms/platform_with_right_gap.gd" id="1_o0g08"]
-[ext_resource type="Texture2D" uid="uid://cohagdedqsowq" path="res://sprites/Mediumplanet.png" id="3_cw2rt"]
+[ext_resource type="Texture2D" uid="uid://sp0kh5aq5x87" path="res://sprites/Updatedplanet.png" id="3_08w03"]
 
 [node name="PlatformWithRightGap" type="CharacterBody2D"]
 script = ExtResource("1_o0g08")
 
 [node name="LeftPlatform" parent="." instance=ExtResource("1_f3s07")]
-texture = ExtResource("3_cw2rt")
+texture = ExtResource("3_08w03")
