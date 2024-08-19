@@ -110,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		SPRITE.texture = SMALL_SPRITE_TEXTURE
 		$SpeedUpSound.play()
 	
-	if current_size == sizes.SMALL:
+	if current_size == sizes.SMALL and not is_dashing:
 		velocity.x = 0
 	elif direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION)
