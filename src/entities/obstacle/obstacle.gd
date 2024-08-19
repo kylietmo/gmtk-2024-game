@@ -12,7 +12,9 @@ func initialize_sprite():
 	if (is_instance_valid(sprite)):
 		sprite.texture = texture
 		collider.scale.x = sprite.texture.get_width() / collider.shape.get_rect().size.x
-		collider.scale.y = sprite.texture.get_height() / collider.shape.get_rect().size.y
+		
+		# Divide by 2 to account for the pill shape not overflowing the UFOs for now
+		collider.scale.y = sprite.texture.get_height() / collider.shape.get_rect().size.y / 2
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	# only free if exiting from the top of the screen
