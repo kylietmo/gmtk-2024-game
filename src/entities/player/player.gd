@@ -23,7 +23,7 @@ var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE
 var MEDIUM_SCALE_VEC = Vector2(Globals.MEDIUM_SIZE_SCALE, Globals.MEDIUM_SIZE_SCALE)
 var SMALL_SCALE_VEC = Vector2(Globals.SMALL_SIZE_SCALE, Globals.SMALL_SIZE_SCALE)
 
-var SMALL_SPRITE_TEXTURE = preload("res://sprites/Smallstarwithtrail.png")
+var SMALL_SPRITE_TEXTURE = preload("res://sprites/Smallstar.png")
 var MEDIUM_SPRITE_TEXTURE = preload("res://sprites/Mediumstar.png")
 var LARGE_SPRITE_TEXTURE = preload("res://sprites/Bigsun.png")
 

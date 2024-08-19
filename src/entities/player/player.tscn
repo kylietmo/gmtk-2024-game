@@ -1,16 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://5yjda1eg7860"]
+[gd_scene load_steps=10 format=3 uid="uid://5yjda1eg7860"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_2ikmc"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="2_2t8ge"]
 [ext_resource type="AudioStream" uid="uid://duae5gqcee6g" path="res://audio/speed_up.mp3" id="3_xdp36"]
 [ext_resource type="AudioStream" uid="uid://dh64lb7oxtat" path="res://audio/slow_down.mp3" id="4_mvksk"]
 [ext_resource type="AudioStream" uid="uid://rrenmokorirt" path="res://audio/invulnerability.mp3" id="4_unk4v"]
+[ext_resource type="Script" path="res://entities/player/cpu_particles_2d.gd" id="6_k2enp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1s5f2"]
 radius = 6.67893
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbxsb"]
 radius = 88.0057
+
+[sub_resource type="Curve" id="Curve_1bg2l"]
+min_value = -1.0
+_data = [Vector2(0, -0.988599), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
@@ -52,6 +58,20 @@ one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+amount = 100
+lifetime = 3.0
+speed_scale = 2.0
+direction = Vector2(0, -1)
+spread = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 20.0
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_1bg2l")
+script = ExtResource("6_k2enp")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
