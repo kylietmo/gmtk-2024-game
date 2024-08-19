@@ -1,7 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://18q6hop7c14w"]
+[gd_scene load_steps=16 format=3 uid="uid://18q6hop7c14w"]
 
 [ext_resource type="Script" path="res://menus/game_over_screen/game_over_screen.gd" id="1_g1jjk"]
+[ext_resource type="Texture2D" uid="uid://dku7k27oqm8lk" path="res://sprites/Background.png" id="2_27jwo"]
 [ext_resource type="AudioStream" uid="uid://kw2dqfc0a4kh" path="res://audio/game_over.mp3" id="2_xm80j"]
+[ext_resource type="FontFile" uid="uid://b545sn3yqme6s" path="res://fonts/PixelifySans-Regular.ttf" id="3_pkl4u"]
+[ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="5_tkhsj"]
+[ext_resource type="Texture2D" uid="uid://d0vqrm1ylrkxr" path="res://sprites/Bigsun.png" id="6_2rtx5"]
+[ext_resource type="Texture2D" uid="uid://6eidb0qokgqf" path="res://sprites/Smallstar.png" id="7_ra1ah"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_163kg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcpme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_doqlv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ehhv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vobl8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur4b1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvopp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kffoc"]
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -12,60 +33,129 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g1jjk")
 
-[node name="TryAgainButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 400.0
-offset_right = 704.0
-offset_bottom = 528.0
-theme_override_font_sizes/font_size = 48
-text = "Try Again"
-
-[node name="MainMenuButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 600.0
-offset_right = 704.0
-offset_bottom = 728.0
-theme_override_font_sizes/font_size = 48
-text = "Main Menu"
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 120.0
-offset_right = 704.0
-offset_bottom = 248.0
-theme_override_font_sizes/font_size = 60
-text = "GAME OVER"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FinalScore" type="Label" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 195.0
-offset_right = 704.0
-offset_bottom = 323.0
-theme_override_font_sizes/font_size = 48
-text = "Final Score: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HighScore" type="Label" parent="."]
-layout_mode = 0
-offset_left = 96.0
-offset_top = 264.0
-offset_right = 704.0
-offset_bottom = 392.0
-theme_override_font_sizes/font_size = 48
-text = "Highest Score"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(35, -147)
+scale = Vector2(0.684313, 0.726312)
+texture = ExtResource("2_27jwo")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_xm80j")
 autoplay = true
 
-[connection signal="pressed" from="TryAgainButton" to="." method="_on_try_again_button_pressed"]
-[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -243.5
+offset_right = 243.5
+offset_bottom = 242.0
+grow_horizontal = 2
+
+[node name="GameOverText" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_font_sizes/font_size = 96
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -226.0
+offset_top = -150.0
+offset_right = 226.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 48
+
+[node name="TryAgainButton" type="Button" parent="HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = SubResource("StyleBoxEmpty_163kg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xcpme")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_doqlv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7ehhv")
+text = "Try Again"
+flat = true
+
+[node name="MainMenuButton" type="Button" parent="HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vobl8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ur4b1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mvopp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kffoc")
+text = "Main Menu"
+flat = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = -121.0
+offset_right = 200.5
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="FinalScore" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_font_sizes/font_size = 64
+text = "Final Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_font_sizes/font_size = 48
+text = "Highest Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(936, 160)
+rotation = 0.523598
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_2rtx5")
+region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(80, 128)
+rotation = -0.523598
+scale = Vector2(0.0336333, 0.0336333)
+texture = ExtResource("7_ra1ah")
+region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(104, 928)
+rotation = -0.523598
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_tkhsj")
+region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
+
+[connection signal="pressed" from="HBoxContainer3/TryAgainButton" to="." method="_on_try_again_button_pressed"]
+[connection signal="pressed" from="HBoxContainer3/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

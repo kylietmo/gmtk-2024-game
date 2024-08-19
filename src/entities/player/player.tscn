@@ -32,8 +32,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_2t8ge")
 region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
 
-[node name="Node" type="Node" parent="Sprite2D"]
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

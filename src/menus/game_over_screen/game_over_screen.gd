@@ -1,11 +1,12 @@
 extends Control
 
+@onready var try_again_button: Button = $HBoxContainer3/TryAgainButton
+@onready var final_score_label: Label = $VBoxContainer/FinalScore
+@onready var high_score_label: Label = $VBoxContainer/HighScore
+
 func _ready() -> void:
-	$FinalScore.text = "Final Score: " + str(Globals.score)
-	$FinalScore.position.x = Globals.SCREEN_WIDTH / 2 - $FinalScore.get_rect().size.x / 2
-	$Label.position.x = Globals.SCREEN_WIDTH / 2 - $Label.get_rect().size.x / 2
-	$TryAgainButton.position.x = Globals.SCREEN_WIDTH / 2 - $TryAgainButton.size.x / 2
-	$MainMenuButton.position.x = Globals.SCREEN_WIDTH / 2 - $MainMenuButton.size.x / 2
+	try_again_button.grab_focus()
+	final_score_label.text = "Final Score: " + str(Globals.score)
 	
 	var high_score = Globals.load_high_score()
 	
@@ -14,8 +15,7 @@ func _ready() -> void:
 		high_score = Globals.score
 		Globals.save_high_score(high_score)
 	
-	$HighScore.text = "Highest Score: " + str(high_score)
-	$HighScore.position.x = Globals.SCREEN_WIDTH / 2 - $HighScore.get_rect().size.x / 2
+	high_score_label.text = "Highest Score: " + str(high_score)
 
 func _on_try_again_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://game.tscn")
