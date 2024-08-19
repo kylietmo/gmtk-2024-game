@@ -16,14 +16,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("size_small") and player.current_size != player.sizes.SMALL and player.current_size != player.sizes.MASSIVE:
+	if InputBuffer.is_action_press_buffered("size_small") and player.current_size != player.sizes.SMALL and player.current_size != player.sizes.MASSIVE:
 		if movement_allowed:
 			apply_small_shake()
 			position.y -= camera_y_offset
 			movement_allowed = false
 			$CameraResetTimer.start(player.SMALL_SIZE_DURATION + 2*player.SIZE_TRANSITION_DURATION)
 		
-	if Input.is_action_just_pressed("size_large") and player.current_size != player.sizes.LARGE and player.current_size != player.sizes.MASSIVE:
+	if InputBuffer.is_action_press_buffered("size_large") and player.current_size != player.sizes.LARGE and player.current_size != player.sizes.MASSIVE:
 		if movement_allowed:
 			position.y += camera_y_offset
 			movement_allowed = false
