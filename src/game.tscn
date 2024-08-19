@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://camera_2d.gd" id="3_o1o6s"]
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
-[ext_resource type="Script" path="res://score.gd" id="6_8tjsl"]
 [ext_resource type="AudioStream" uid="uid://blgoq4c3ymhon" path="res://audio/crash.mp3" id="9_lritj"]
+[ext_resource type="PackedScene" uid="uid://bw7slm3o5iy5l" path="res://hud.tscn" id="10_4tldu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
@@ -52,16 +52,7 @@ parameters/looping = true
 unique_name_in_owner = true
 stream = ExtResource("9_lritj")
 
-[node name="Score" type="Label" parent="."]
-z_index = 1000
-offset_left = -480.0
-offset_top = -183.0
-offset_right = -390.0
-offset_bottom = -149.0
-theme_override_font_sizes/font_size = 40
-text = "Score: 0"
-horizontal_alignment = 1
-script = ExtResource("6_8tjsl")
+[node name="HUD" parent="." instance=ExtResource("10_4tldu")]
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="Camera2D/CameraResetTimer" to="Camera2D" method="_on_camera_reset_timer_timeout"]

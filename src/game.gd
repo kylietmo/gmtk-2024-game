@@ -54,7 +54,6 @@ func _ready() -> void:
 	Globals.score = 0
 	spawn_barrier_with_gaps()
 	assert_obstacle_probabilities()
-	
 
 func _process(delta: float) -> void:
 	match player.current_size:
