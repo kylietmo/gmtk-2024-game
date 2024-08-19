@@ -120,6 +120,7 @@ func become_invulnerable():
 	size_tween.parallel().tween_property(SPRITE, "rotation_degrees", 360, INVULNERABILITY_DURATION)
 	size_tween.parallel().tween_property(self, "current_size", sizes.MASSIVE, 0)
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
+	$InvulnerabilitySound.play()
 	$InvulnerableTimer.start(INVULNERABILITY_DURATION)
 	
 func start_cooldown(duration: float):
