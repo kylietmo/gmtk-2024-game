@@ -7,7 +7,7 @@ var platform_direction = 1
 var platform_width = 0.0
 
 func _ready():
-	platform_width = Globals.IN_BOUNDS_WIDTH / 3
+	platform_width = Globals.IN_BOUNDS_WIDTH / 2
 	platform_speed = platform_width / 50
 	
 	platform.initialize_sprite()
