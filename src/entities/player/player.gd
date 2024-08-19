@@ -16,7 +16,7 @@ class_name Player
 @onready var DASH_X_BOUND_OFFSET = Globals.IN_BOUNDS_WIDTH / 10
 @onready var DASH_SPEED = Globals.IN_BOUNDS_WIDTH / 3
 
-@onready var SPRITE  = $Sprite2D
+@onready var SPRITE = $Sprite2D
 
 var MASSIVE_SCALE_VEC = Vector2(Globals.MASSIVE_SIZE_SCALE, Globals.MASSIVE_SIZE_SCALE)
 var LARGE_SCALE_VEC = Vector2(Globals.LARGE_SIZE_SCALE, Globals.LARGE_SIZE_SCALE)
@@ -31,6 +31,7 @@ enum sizes {
 	SMALL,
 	MEDIUM,
 	LARGE,
+	REVERSE_LARGE,
 	MASSIVE
 }
 
@@ -40,17 +41,12 @@ enum sizes {
 @onready var is_dashing = false
 
 var size_tween : Tween
-var current_rotation_degrees := 0.0
 
 func _ready() -> void:
 	scale = MEDIUM_SCALE_VEC
 	position.y = Globals.PLAYER_START_Y
 	
-func _physics_process(delta: float) -> void:
-	
-	if current_size == sizes.MEDIUM:
-		rotation_degrees += 1
-	
+func _physics_process(delta: float) -> void:	
 	if Input.is_action_just_pressed("size_small") and not is_invulnerable and not is_cooling_down and not is_dashing:
 		become_small()
 
@@ -109,8 +105,7 @@ func become_invulnerable():
 	$InvulnerabilitySound.play()
 	$InvulnerableTimer.start(INVULNERABILITY_DURATION)
 
-func become_large(include_cooldown: bool = true) -> void:
-	current_rotation_degrees = rotation_degrees
+func become_large(include_cooldown: bool = true, size = sizes.LARGE) -> void:
 	rotation_degrees = 0
 	
 	if include_cooldown:
@@ -119,17 +114,19 @@ func become_large(include_cooldown: bool = true) -> void:
 		size_tween.kill()
 	size_tween = create_tween()
 	size_tween.tween_property(self, "scale", LARGE_SCALE_VEC, SIZE_TRANSITION_DURATION)
-	size_tween.parallel().tween_property(self, "current_size", sizes.LARGE, 0)
+	size_tween.parallel().tween_property(self, "current_size", size, 0)
 	size_tween.tween_interval(LARGE_SIZE_DURATION)
 	size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
 	size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 	size_tween.connect("finished", _on_size_tween_finished)
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
 	$SlowDownSound.play()
+	$TrailParticles.emitting = false
+	$KnockbackParticles.restart()
+
 
 func become_small() -> void:
 	start_cooldown(SIZE_COOLDOWN_DURATION)
-	current_rotation_degrees = rotation_degrees
 	rotation_degrees = 0
 	if size_tween:
 		size_tween.kill()
@@ -151,8 +148,8 @@ func start_cooldown(duration: float):
 func _on_size_tween_finished():
 	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
-	rotation_degrees = current_rotation_degrees
 	is_dashing = false
+	$TrailParticles.emitting = true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if is_invulnerable and body is Obstacle:
@@ -171,9 +168,8 @@ func _on_invulnerable_timer_timeout() -> void:
 	size_tween.tween_property(self, "scale", MEDIUM_SCALE_VEC, SIZE_TRANSITION_DURATION)
 	size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 	size_tween.connect("finished", _on_size_tween_finished)
-	current_rotation_degrees = rotation_degrees
-	become_large(false)
 	is_invulnerable = false
+	become_large(false, sizes.REVERSE_LARGE)
 
 func _on_cooldown_timer_timeout() -> void:
 	is_cooling_down = false

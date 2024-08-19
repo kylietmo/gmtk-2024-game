@@ -41,8 +41,8 @@ var obstacle_scenes : Array[Dictionary] = [
 ]
 
 var BREAKABLE_OBSTACLE_SPAWN_PROBABILITY = 0.2
-var INVULNERABLE_CONSUMABLE_PROBABILITY = 0.1
-var INVULNERABILITY_SCORE_THRESHOLD = 10
+var INVULNERABLE_CONSUMABLE_PROBABILITY = 1
+var INVULNERABILITY_SCORE_THRESHOLD = 1
 
 func init_obstacle_resources() -> void:
 	for scene in obstacle_scenes:
@@ -67,6 +67,8 @@ func _process(delta: float) -> void:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT / 2
 		player.sizes.LARGE:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT / 5
+		player.sizes.REVERSE_LARGE:
+			SPEED = Globals.IN_BOUNDS_HEIGHT / 5
 		player.sizes.MASSIVE:
 			SPEED = -Globals.IN_BOUNDS_HEIGHT * 2
 	
