@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://5yjda1eg7860"]
+[gd_scene load_steps=8 format=3 uid="uid://5yjda1eg7860"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_2ikmc"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="2_2t8ge"]
 [ext_resource type="AudioStream" uid="uid://duae5gqcee6g" path="res://audio/speed_up.mp3" id="3_xdp36"]
+[ext_resource type="AudioStream" uid="uid://dh64lb7oxtat" path="res://audio/slow_down.mp3" id="4_mvksk"]
 [ext_resource type="AudioStream" uid="uid://rrenmokorirt" path="res://audio/invulnerability.mp3" id="4_unk4v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1s5f2"]
@@ -38,6 +39,9 @@ shape = SubResource("CircleShape2D_sbxsb")
 [node name="SpeedUpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_xdp36")
 pitch_scale = 2.0
+
+[node name="SlowDownSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mvksk")
 
 [node name="InvulnerabilitySound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_unk4v")

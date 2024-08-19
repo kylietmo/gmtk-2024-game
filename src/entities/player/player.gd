@@ -72,6 +72,7 @@ func _physics_process(delta: float) -> void:
 		size_tween.parallel().tween_property(self, "current_size", sizes.MEDIUM, 0)
 		size_tween.connect("finished", _on_size_tween_finished)
 		SPRITE.texture = LARGE_SPRITE_TEXTURE
+		$SlowDownSound.play()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
