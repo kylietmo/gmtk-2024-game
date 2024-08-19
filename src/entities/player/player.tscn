@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://5yjda1eg7860"]
+[gd_scene load_steps=10 format=3 uid="uid://5yjda1eg7860"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_2ikmc"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="2_2t8ge"]
@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://dh64lb7oxtat" path="res://audio/slow_down.mp3" id="4_mvksk"]
 [ext_resource type="AudioStream" uid="uid://rrenmokorirt" path="res://audio/invulnerability.mp3" id="4_unk4v"]
 [ext_resource type="Script" path="res://entities/player/cpu_particles_2d.gd" id="6_k2enp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1s5f2"]
+radius = 6.67893
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbxsb"]
 radius = 88.0057
@@ -32,9 +35,9 @@ region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-z_index = 6
-polygon = PackedVector2Array(20, -73, 28, -41, 73, -41, 80, -35, 79, -24, 51, 10, 54, 35, 56, 51, 54, 67, 48, 73, 37, 73, 22, 64, 12, 57, 6, 51, 1, 49, -17, 67, -28, 73, -40, 75, -47, 73, -51, 64, -53, 52, -51, 40, -48, 26, -44, 13, -48, 8, -57, 2, -67, -8, -73, -17, -77, -25, -78, -35, -71, -41, -62, -41, -54, -43, -44, -42, -36, -41, -29, -40, -25, -39, -22, -51, -16, -69, -11, -80, -5, -88, 3, -91, 9, -87, 15, -81)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(13.0269, 13.3195)
+shape = SubResource("CircleShape2D_1s5f2")
 
 [node name="BarrierCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sbxsb")
