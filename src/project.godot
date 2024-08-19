@@ -21,9 +21,9 @@ Globals="*res://globals.gd"
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=1600
-window/size/resizable=false
+window/size/viewport_width=1000
+window/size/viewport_height=1000
+window/stretch/mode="viewport"
 
 [input]
 
