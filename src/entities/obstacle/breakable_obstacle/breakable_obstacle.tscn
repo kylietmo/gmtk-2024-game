@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceq2k7j3t67pd"]
 
 [ext_resource type="Script" path="res://entities/obstacle/breakable_obstacle/breakable_obstacle.gd" id="1_na852"]
-[ext_resource type="Texture2D" uid="uid://cc6kf2sn6epws" path="res://sprites/Breakableplatform.png" id="2_40e2b"]
+[ext_resource type="Texture2D" uid="uid://8v18ir4bd02u" path="res://sprites/asteroidbelt.png" id="2_7py4p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbf0"]
 size = Vector2(829.098, 454.218)
@@ -11,7 +11,7 @@ scale = Vector2(2.62695, 0.310889)
 script = ExtResource("1_na852")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_40e2b")
+texture = ExtResource("2_7py4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.16171e-05, -6.43317)
