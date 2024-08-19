@@ -37,8 +37,9 @@ enum sizes {
 
 @onready var current_size = sizes.MEDIUM
 @onready var is_cooling_down = false
-@onready var is_invulnerable = false
+@onready var is_dash_cooling_down = false
 @onready var is_dashing = false
+@onready var is_invulnerable = false
 
 var size_tween : Tween
 
@@ -56,12 +57,12 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("dash") and direction != 0 and not is_cooling_down and not is_invulnerable:
+	if Input.is_action_just_pressed("dash") and direction != 0 and not is_dash_cooling_down and not is_invulnerable:
 		rotation_degrees = 0
 		if size_tween:
 			size_tween.kill()
 			
-		start_cooldown(DASH_COOLDOWN_DURATION)
+		start_dash_cooldown(DASH_COOLDOWN_DURATION)
 		
 		var new_x_pos = clampf(position.x + DASH_SPEED * direction, Globals.LEFT_BARRIER_X + DASH_X_BOUND_OFFSET, Globals.RIGHT_BARRIER_X - DASH_X_BOUND_OFFSET)
 
@@ -90,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta)
 	
 	if collision_info:
-		velocity = velocity.bounce(collision_info.get_normal())
+		velocity.x = velocity.bounce(collision_info.get_normal()).x
 		velocity.x *= BOUNCE_VELOCITY_SCALAR
 
 func become_invulnerable():
@@ -125,7 +126,6 @@ func become_large(include_cooldown: bool = true, size = sizes.LARGE) -> void:
 	size_tween.connect("finished", _on_size_tween_finished)
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
 	$SlowDownSound.play()
-	$TrailParticles.emitting = false
 	$KnockbackParticles.restart()
 
 
@@ -148,12 +148,15 @@ func become_small() -> void:
 func start_cooldown(duration: float):
 	is_cooling_down = true
 	$CooldownTimer.start(duration)
+	
+func start_dash_cooldown(duration: float):
+	is_dash_cooling_down = true
+	$DashCooldownTimer.start(duration)
 
 func _on_size_tween_finished():
 	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
 	is_dashing = false
-	$TrailParticles.emitting = true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if is_invulnerable and body is Obstacle:
@@ -175,3 +178,7 @@ func _on_invulnerable_timer_timeout() -> void:
 
 func _on_cooldown_timer_timeout() -> void:
 	is_cooling_down = false
+
+
+func _on_dash_cooldown_timer_timeout() -> void:
+	is_dash_cooling_down = false
