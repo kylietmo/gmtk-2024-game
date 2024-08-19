@@ -20,9 +20,6 @@ var MASSIVE_SIZE_SCALE
 var LARGE_SIZE_SCALE
 var MEDIUM_SIZE_SCALE
 var SMALL_SIZE_SCALE
-var SMALL_PLATFORM_TEXTURE = preload("res://sprites/Small planet.png")
-var MEDIUM_PLATFORM_TEXTURE = preload("res://sprites/Mediumplanet.png")
-var LARGE_PLATFORM_TEXTURE = preload("res://sprites/Big planet.png")
 
 func _ready():
 	SCREEN_WIDTH = get_viewport_rect().size.x

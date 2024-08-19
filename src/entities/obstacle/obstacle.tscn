@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://kxalargknswc"]
 
 [ext_resource type="Script" path="res://entities/obstacle/obstacle.gd" id="1_1nlmb"]
-[ext_resource type="Texture2D" uid="uid://donpqwen0r3lr" path="res://sprites/Small planet.png" id="2_7u1fi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba4ak"]
+load_path = "res://.godot/imported/Small planet.png-0042395353f1f619b26e680aa81c5f42.ctex"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eplec"]
 radius = 254.11
@@ -12,7 +14,7 @@ scale = Vector2(2.62695, 0.310889)
 script = ExtResource("1_1nlmb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_7u1fi")
+texture = SubResource("CompressedTexture2D_ba4ak")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
