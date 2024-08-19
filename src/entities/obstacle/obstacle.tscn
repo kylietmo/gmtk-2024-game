@@ -1,20 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://kxalargknswc"]
 
 [ext_resource type="Script" path="res://entities/obstacle/obstacle.gd" id="1_1nlmb"]
-[ext_resource type="Texture2D" uid="uid://brijparfdj8qw" path="res://sprites/black_rectangle.png" id="2_31tjq"]
+[ext_resource type="Texture2D" uid="uid://donpqwen0r3lr" path="res://sprites/Small planet.png" id="2_7u1fi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgbf0"]
-size = Vector2(829.098, 178)
+size = Vector2(848.332, 178)
 
 [node name="Obstacle" type="CharacterBody2D"]
 scale = Vector2(2.62695, 0.310889)
 script = ExtResource("1_1nlmb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_31tjq")
+texture = ExtResource("2_7u1fi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.16171e-05, 0)
+position = Vector2(-4.18737, 0)
+scale = Vector2(1.384, 1.55133)
 shape = SubResource("RectangleShape2D_rgbf0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

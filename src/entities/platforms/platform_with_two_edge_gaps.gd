@@ -7,10 +7,11 @@ const MAX_ROTATION_DEGREES = 20.0
 
 # TODO: consider randomized height
 func _ready():
+	initialize_sprite()
 	var gap_width = Globals.IN_BOUNDS_WIDTH * GAP_WIDTH_SCALAR
 	
 	var platform_width = (Globals.IN_BOUNDS_WIDTH - (2 * gap_width))
-	
+	platform.initialize_sprite()
 	var sprite : Sprite2D = platform.find_child("Sprite2D")
 	var platform_sprite_width = sprite.texture.get_size().x
 	
