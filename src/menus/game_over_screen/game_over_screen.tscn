@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://menus/game_over_screen/game_over_screen.gd" id="1_g1jjk"]
 [ext_resource type="Texture2D" uid="uid://dku7k27oqm8lk" path="res://sprites/Background.png" id="2_27jwo"]
 [ext_resource type="AudioStream" uid="uid://kw2dqfc0a4kh" path="res://audio/game_over.mp3" id="2_xm80j"]
-[ext_resource type="FontFile" uid="uid://b545sn3yqme6s" path="res://fonts/PixelifySans-Regular.ttf" id="3_pkl4u"]
+[ext_resource type="FontFile" uid="uid://bsikolrdw7kb2" path="res://fonts/slkscr.ttf" id="5_8te5f"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="5_tkhsj"]
 [ext_resource type="Texture2D" uid="uid://d0vqrm1ylrkxr" path="res://sprites/Bigsun.png" id="6_2rtx5"]
 [ext_resource type="Texture2D" uid="uid://6eidb0qokgqf" path="res://sprites/Smallstar.png" id="7_ra1ah"]
@@ -54,7 +54,7 @@ grow_horizontal = 2
 
 [node name="GameOverText" type="Label" parent="HBoxContainer2"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_fonts/font = ExtResource("5_8te5f")
 theme_override_font_sizes/font_size = 96
 text = "GAME OVER"
 horizontal_alignment = 1
@@ -67,19 +67,19 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -226.0
+offset_left = -340.0
 offset_top = -150.0
-offset_right = 226.0
+offset_right = 340.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 48
+theme_override_constants/separation = 40
 
 [node name="TryAgainButton" type="Button" parent="HBoxContainer3"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
 theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
-theme_override_fonts/font = ExtResource("3_pkl4u")
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("5_8te5f")
+theme_override_font_sizes/font_size = 52
 theme_override_styles/focus = SubResource("StyleBoxEmpty_163kg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xcpme")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_doqlv")
@@ -91,8 +91,8 @@ flat = true
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
 theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
-theme_override_fonts/font = ExtResource("3_pkl4u")
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("5_8te5f")
+theme_override_font_sizes/font_size = 52
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vobl8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ur4b1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_mvopp")
@@ -122,7 +122,7 @@ theme_override_constants/separation = 24
 
 [node name="FinalScore" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_fonts/font = ExtResource("5_8te5f")
 theme_override_font_sizes/font_size = 64
 text = "Final Score: 0"
 horizontal_alignment = 1
@@ -130,14 +130,14 @@ vertical_alignment = 1
 
 [node name="HighScore" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_pkl4u")
+theme_override_fonts/font = ExtResource("5_8te5f")
 theme_override_font_sizes/font_size = 48
 text = "Highest Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(936, 160)
+position = Vector2(961, 206)
 rotation = 0.523598
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("6_2rtx5")
@@ -151,7 +151,7 @@ texture = ExtResource("7_ra1ah")
 region_rect = Rect2(807.203, 898.429, 1010.29, 1309.65)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(104, 928)
+position = Vector2(66, 928)
 rotation = -0.523598
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_tkhsj")
