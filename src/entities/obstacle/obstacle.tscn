@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://entities/obstacle/obstacle.gd" id="1_1nlmb"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba4ak"]
+load_path = "res://.godot/imported/Small planet.png-0042395353f1f619b26e680aa81c5f42.ctex"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eplec"]
 radius = 254.11

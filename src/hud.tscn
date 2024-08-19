@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw7slm3o5iy5l"]
+[gd_scene load_steps=3 format=3 uid="uid://cemer7xlf0w2i"]
 
 [ext_resource type="Script" path="res://score.gd" id="1_6lbcp"]
+[ext_resource type="FontFile" uid="uid://b545sn3yqme6s" path="res://fonts/PixelifySans-Regular.ttf" id="1_v2jw7"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -12,5 +13,7 @@ theme_override_constants/margin_top = 30
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_v2jw7")
+theme_override_font_sizes/font_size = 48
 text = "Score: 0"
 script = ExtResource("1_6lbcp")

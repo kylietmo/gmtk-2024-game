@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bql4uh46bxh0l" path="res://entities/barrier_wall/barrier_wall.tscn" id="3_tlj01"]
 [ext_resource type="AudioStream" uid="uid://cyhlx13yryb3e" path="res://audio/get_there.mp3" id="4_ivb48"]
 [ext_resource type="AudioStream" uid="uid://blgoq4c3ymhon" path="res://audio/crash.mp3" id="9_lritj"]
-[ext_resource type="PackedScene" uid="uid://bw7slm3o5iy5l" path="res://hud.tscn" id="10_4tldu"]
+[ext_resource type="PackedScene" uid="uid://cemer7xlf0w2i" path="res://hud.tscn" id="10_4tldu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qfrmy")
