@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("dash") and direction != 0 and not is_cooling_down and not is_invulnerable:
+	if Input.is_action_just_pressed("dash") and direction != 0 and not is_invulnerable:
 		rotation_degrees = 0
 		if size_tween:
 			size_tween.kill()
@@ -125,7 +125,6 @@ func become_large(include_cooldown: bool = true, size = sizes.LARGE) -> void:
 	size_tween.connect("finished", _on_size_tween_finished)
 	SPRITE.texture = LARGE_SPRITE_TEXTURE
 	$SlowDownSound.play()
-	$TrailParticles.emitting = false
 	$KnockbackParticles.restart()
 
 
@@ -153,7 +152,6 @@ func _on_size_tween_finished():
 	SPRITE.rotation_degrees = 0
 	SPRITE.texture = MEDIUM_SPRITE_TEXTURE
 	is_dashing = false
-	$TrailParticles.emitting = true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if is_invulnerable and body is Obstacle:
