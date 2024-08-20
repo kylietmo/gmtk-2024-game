@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "GMTK 2024 Game",
 	"scripts": {
-		"deploy": "gh-pages -d ./dist"
+		"deploy": "gh-pages -d ./dist/web"
 	},
 	"repository": {
 		"type": "git",
