@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bdoq1cfmf7who"]
+[gd_scene load_steps=17 format=3 uid="uid://bdoq1cfmf7who"]
 
 [ext_resource type="Script" path="res://menus/start_screen/start_screen.gd" id="1_ejrxe"]
 [ext_resource type="Texture2D" uid="uid://dku7k27oqm8lk" path="res://sprites/Background.png" id="2_nesii"]
 [ext_resource type="Texture2D" uid="uid://d0vqrm1ylrkxr" path="res://sprites/Bigsun.png" id="4_i20d8"]
+[ext_resource type="Texture2D" uid="uid://wwdsym4v5gym" path="res://sprites/Logo.png" id="4_o6jnt"]
 [ext_resource type="FontFile" uid="uid://bsikolrdw7kb2" path="res://fonts/slkscr.ttf" id="4_vl6ri"]
 [ext_resource type="Texture2D" uid="uid://6eidb0qokgqf" path="res://sprites/Smallstar.png" id="5_5u7vt"]
 [ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="6_4uthh"]
@@ -82,35 +83,31 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -233.0
-offset_top = 48.0
-offset_right = 233.0
-offset_bottom = 164.0
+offset_left = -440.0
+offset_top = 20.0
+offset_right = 1426.0
+offset_bottom = 777.0
 grow_horizontal = 2
+scale = Vector2(0.46, 0.46)
 
-[node name="Title" type="Label" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("4_vl6ri")
-theme_override_font_sizes/font_size = 96
-text = "GET THERE"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("4_o6jnt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(227, 467)
+position = Vector2(195.143, 545.673)
 scale = Vector2(0.0306349, 0.0306349)
 texture = ExtResource("5_5u7vt")
 script = ExtResource("10_ax0xi")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(432, 467)
+position = Vector2(400.143, 545.673)
 scale = Vector2(0.113707, 0.113707)
 texture = ExtResource("6_4uthh")
 script = ExtResource("10_ax0xi")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(735, 472)
+position = Vector2(703.143, 550.673)
 scale = Vector2(0.113707, 0.113707)
 texture = ExtResource("4_i20d8")
 script = ExtResource("10_ax0xi")
