@@ -113,3 +113,4 @@ texture = ExtResource("4_i20d8")
 script = ExtResource("10_ax0xi")
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HowToButton" to="." method="_on_how_to_button_pressed"]

@@ -1,0 +1,169 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3ness4a1mmv1"]
+
+[ext_resource type="Texture2D" uid="uid://dku7k27oqm8lk" path="res://sprites/Background.png" id="1_3u1lp"]
+[ext_resource type="Script" path="res://menus/how_to_play_screen/how_to_play_screen.gd" id="1_i2n0a"]
+[ext_resource type="FontFile" uid="uid://bsikolrdw7kb2" path="res://fonts/slkscr.ttf" id="2_2mle0"]
+[ext_resource type="Texture2D" uid="uid://6eidb0qokgqf" path="res://sprites/Smallstar.png" id="4_ph465"]
+[ext_resource type="Texture2D" uid="uid://dltknq08rsgmr" path="res://sprites/Mediumstar.png" id="5_hsvob"]
+[ext_resource type="Texture2D" uid="uid://cvf3yrlt3ymfg" path="res://sprites/Sun.png" id="6_ydunb"]
+[ext_resource type="Texture2D" uid="uid://sp0kh5aq5x87" path="res://sprites/Updatedplanet.png" id="7_facfj"]
+[ext_resource type="Texture2D" uid="uid://8v18ir4bd02u" path="res://sprites/asteroidbelt.png" id="8_ttawl"]
+[ext_resource type="Texture2D" uid="uid://dx8qdppqoxvu4" path="res://sprites/Sparkle1.png" id="9_bh4rx"]
+[ext_resource type="Texture2D" uid="uid://bq566o36rrfrm" path="res://sprites/Sparkle2.png" id="10_yfhei"]
+[ext_resource type="Texture2D" uid="uid://cicvmg6gs5kh6" path="res://sprites/Sparkle3.png" id="11_rf5ih"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i6l5o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1uyq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0goqp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_by18r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cth8l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_bh4rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yfhei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rf5ih")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="HowToPlayScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i2n0a")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_3u1lp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -130.0
+offset_right = 432.0
+offset_bottom = -48.0
+grow_vertical = 0
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_colors/font_focus_color = Color(1, 0.670588, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 52
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i6l5o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a1uyq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0goqp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_by18r")
+text = "Back"
+flat = true
+alignment = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -973.0
+offset_right = 942.0
+offset_bottom = -158.0
+grow_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "<left/a> and <right/d>
+  to move side to side"
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "<down/s> to speed up
+  and become small"
+
+[node name="Label3" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "<up/w> to slow down
+  and become large"
+
+[node name="Label4" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "<space/z> while moving
+  to dash sideways"
+
+[node name="Label5" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "become small to get
+  past planetary gaps"
+
+[node name="Label6" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "become large to break
+  through asteroid belts"
+
+[node name="Label7" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2mle0")
+theme_override_font_sizes/font_size = 48
+text = "Collect sparkles to become
+  temporarily invulnerable"
+
+[node name="MediumSprite" type="Sprite2D" parent="."]
+position = Vector2(885, 75)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_hsvob")
+
+[node name="LargeSprite" type="Sprite2D" parent="."]
+position = Vector2(885, 300)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_ydunb")
+
+[node name="ConsumableSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(920, 770)
+scale = Vector2(0.2, 0.174)
+sprite_frames = SubResource("SpriteFrames_cth8l")
+frame_progress = 0.570694
+
+[node name="SmallSprite" type="Sprite2D" parent="."]
+position = Vector2(885, 180)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("4_ph465")
+
+[node name="ObstacleSprite" type="Sprite2D" parent="."]
+position = Vector2(885, 540)
+scale = Vector2(0.125397, 0.125397)
+texture = ExtResource("7_facfj")
+
+[node name="BreakableSprite" type="Sprite2D" parent="."]
+position = Vector2(885, 655)
+scale = Vector2(0.0574321, 0.0574321)
+texture = ExtResource("8_ttawl")
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

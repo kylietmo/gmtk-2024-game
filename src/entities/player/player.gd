@@ -48,10 +48,10 @@ func _ready() -> void:
 	position.y = Globals.PLAYER_START_Y
 	
 func _physics_process(delta: float) -> void:
-	if InputBuffer.is_action_press_buffered("size_small") and not is_invulnerable and not is_cooling_down and not is_dashing:
+	if Input.is_action_just_pressed("size_small") and not is_invulnerable and not is_cooling_down and not is_dashing:
 		become_small()
 
-	if InputBuffer.is_action_press_buffered("size_large") and not is_invulnerable and not is_cooling_down and not is_dashing:
+	if Input.is_action_just_pressed("size_large") and not is_invulnerable and not is_cooling_down and not is_dashing:
 		become_large()
 
 	# Get the input direction and handle the movement/deceleration.
